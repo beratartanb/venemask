@@ -1,0 +1,68 @@
+﻿refine pass 1 split edges 24459 tris 604976
+refine pass 2 split edges 52622 tris 710220
+refine pass 3 split edges 112382 tris 934984
+face labels {'M_Hat': 495640, 'M_Trim': 282716, 'M_Gold': 65344, 'M_Face': 91284}
+tilt diff at bounds 50.95565094053586 -87.97043026270066
+free-standing tilt would be -30.798172792597985
+contacts 31 x range -6.414283752441406 9.652125358581543 y range -57.21838170744107 -50.19012579218915
+centre of mass (rotated) (-0.7016440139856793, 39.08469131987159, 148.11330227790938)
+{
+  "lean_deg": -12.0,
+  "rear_contact_cm": [
+    -13.939619445800782,
+    8.286416007227238,
+    20.684565887280108
+  ],
+  "floor_contact_cm": [
+    [
+      0.17280133962631225,
+      -8.211100775875781,
+      0.07210975000807789
+    ],
+    [
+      0.31305627822875975,
+      -8.044993700408316,
+      0.009753926923021438
+    ],
+    [
+      0.017720872163772584,
+      -8.209927384360693,
+      0.018279046329912063
+    ],
+    [
+      0.15737401247024535,
+      -8.060942937070454,
+      0.0010675499542671218
+    ],
+    [
+      0.29722819328308103,
+      -8.001711294783888,
+      0.0005925768094168227
+    ]
+  ],
+  "product_id": 7591523549267,
+  "handle": "casanova-mask-bauta-mask-venetian-mask",
+  "title": "Casanova Bauta Mask - Eyes Wide Shut Inspired",
+  "source_stl": "C:\\Users\\berat\\Documents\\Venemask_Cinematic_Showroom\\SourceAssets\\casanova_bauta\\casanova_bauta_3.stl",
+  "rest_tilt_deg": -12.000000000000002,
+  "bounds_cm": [
+    [
+      -15.047090148925781,
+      -8.286416007227238,
+      0.0
+    ],
+    [
+      15.047090148925781,
+      8.286416007227238,
+      23.15677939119816
+    ]
+  ],
+  "face_labels": {
+    "M_Hat": 495640,
+    "M_Trim": 282716,
+    "M_Gold": 65344,
+    "M_Face": 91284
+  },
+  "verts": 419147,
+  "tris": 934984
+}

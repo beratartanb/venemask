@@ -1,0 +1,21 @@
+engine 5.8.1-56057345+++UE5+Release-5.8
+api MaterialEditingLibrary True
+api StaticMeshEditorSubsystem True
+api MoviePipelineQueueSubsystem True
+api MoviePipelineDeferredPass_PathTracer True
+api MoviePipelinePIEExecutor True
+api LevelSequenceEditorBlueprintLibrary True
+api MoviePipelineAntiAliasingSetting True
+api MoviePipelineImageSequenceOutput_PNG True
+api MoviePipelineImageSequenceOutput_EXR True
+api CineCameraActor True
+api InterchangeGenericAssetsPipeline True
+api LevelEditorSubsystem True
+set_nanite_settings True
+imported ['/Game/Venemask/Products/CasanovaBauta/SM_CasanovaBauta.SM_CasanovaBauta']
+bbox min <Struct 'Vector' (0x000002473B4D8F00) {x: -15.047090, y: -23.156780, z: -8.286420}> max <Struct 'Vector' (0x000002473B4D8F18) {x: 15.047090, y: 0.000000, z: 8.286420}>
+slot 0 M_Hat /Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial
+slot 1 M_Trim /Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial
+slot 2 M_Gold /Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial
+slot 3 M_Face /Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial
+tris lod0 7778

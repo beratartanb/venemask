@@ -1,0 +1,8 @@
+SM_CasanovaBauta triangles lod0 809547 verts; nanite False
+SM_LedgeCap triangles lod0 73333 verts; nanite False
+SM_ParapetBody triangles lod0 16391 verts; nanite False
+SM_Pier triangles lod0 26685 verts; nanite False
+SM_FloorSlab triangles lod0 9328 verts; nanite False
+mask yaw 145.0 back dir (0.5735764363510459, 0.8191520442889919) pier centre (13.356539508813352, 19.075115276484098)
+camera focus distance 141.781005859375
+sequence /Game/Venemask/Cinematics/LS_Hero.LS_Hero

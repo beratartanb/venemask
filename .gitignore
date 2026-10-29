@@ -1,0 +1,22 @@
+# Unreal generated / heavy
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+Content/
+.vs/
+*.sln
+
+# large source meshes and intermediate renders (kept locally)
+SourceAssets/**/*.stl
+SourceAssets/**/*.obj
+SourceAssets/stone/
+SourceAssets/textures/
+Renders/lumen_preview/
+Renders/pt_beauty/
+Renders/aov/
+Renders/v01_lumen_preview/
+Renders/**/*.exr
+
+__pycache__/
+*.pyc

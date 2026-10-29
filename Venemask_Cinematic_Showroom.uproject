@@ -1,0 +1,14 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "5.8",
+	"Category": "",
+	"Description": "Venemask cinematic showroom - hero scene, camera route and web renders. Separate from any game project.",
+	"Plugins": [
+		{ "Name": "PythonScriptPlugin", "Enabled": true },
+		{ "Name": "EditorScriptingUtilities", "Enabled": true },
+		{ "Name": "SequencerScripting", "Enabled": true },
+		{ "Name": "MovieRenderPipeline", "Enabled": true },
+		{ "Name": "CineCameraRigs", "Enabled": true },
+		{ "Name": "OpenImageDenoise", "Enabled": true }
+	]
+}
