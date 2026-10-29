@@ -12,6 +12,7 @@ SourceAssets/**/*.stl
 SourceAssets/**/*.obj
 SourceAssets/stone/
 SourceAssets/textures/
+
 Renders/lumen_preview/
 Renders/pt_beauty/
 Renders/aov/
@@ -27,3 +28,7 @@ Renders/gateA_hybrid/aov/*.exr
 Renders/gateA_hybrid/stills/*.exr
 Renders/gateA_hybrid/move_singleplate/
 Renders/gateA_hybrid/stills_singleplate/*.exr
+Renders/plate_lin/
+Renders/gateA_hybrid/move_round21/
+Renders/gateA_hybrid/stills_round21/
+

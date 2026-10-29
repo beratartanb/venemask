@@ -38,7 +38,7 @@ foreach ($k in "K0", "K1", "K2") {
         @{ img = $ref; label = "referans 02 (tek kare, $k icin ayni)" },
         @{ img = (Load "$H\stills\L_Hero_LS_${k}_PathTracer.0000.png"); label = "v6 tam geometri - $k" },
         @{ img = (Load "$H\stills_singleplate\L_Hero_Hybrid_LS_${k}_Hybrid_PathTracer.0000.png"); label = "hibrit v1 (tek plaka) - $k" },
-        @{ img = (Load "$H\stills\L_Hero_Hybrid_LS_${k}_Hybrid_PathTracer.0000.png"); label = "hibrit v2 (3 plaka) - $k" }
+        @{ img = (Load "$H\stills\L_Hero_Hybrid_LS_${k}_Hybrid_PathTracer.0000.png"); label = "hibrit v2.2 (3 plaka, linear) - $k" }
     )
     for ($c = 0; $c -lt 4; $c++) {
         $x = $pad + $c * ($tw + $pad); $y = 30 + $pad + $r * ($th + $lab + $pad)

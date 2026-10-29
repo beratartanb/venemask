@@ -1,5 +1,5 @@
-plate texture T_Plate_K0 C:/Users/berat/Documents/Venemask_Cinematic_Showroom/Renders\plate\L_Hero_Plate_LS_Plate_.0000.exr 4096 2304
-plate texture T_Plate_K1 C:/Users/berat/Documents/Venemask_Cinematic_Showroom/Renders\plate\L_Hero_Plate_LS_Plate_K1_.0000.exr 4096 2304
-plate texture T_Plate_K2 C:/Users/berat/Documents/Venemask_Cinematic_Showroom/Renders\plate\L_Hero_Plate_LS_Plate_K2_.0000.exr 4096 2304
+plate texture T_Plate_K0 C:\Users\berat\Documents\Venemask_Cinematic_Showroom\Renders\plate_lin\L_Hero_Plate_LS_Plate_.0000.exr 4096 2304
+plate texture T_Plate_K1 C:\Users\berat\Documents\Venemask_Cinematic_Showroom\Renders\plate_lin\L_Hero_Plate_LS_Plate_K1_.0000.exr 4096 2304
+plate texture T_Plate_K2 C:\Users\berat\Documents\Venemask_Cinematic_Showroom\Renders\plate_lin\L_Hero_Plate_LS_Plate_K2_.0000.exr 4096 2304
 projection material built with 3 plates
 hybrid: projection material on 18 proxy actors; plates ['K0', 'K1', 'K2']

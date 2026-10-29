@@ -1,5 +1,41 @@
 # GATE A-HYBRID — hibrit çevre denemesi (v6 üzerine)
 
+## Tur 2.2 — üç bantlı hayalet ölçümü, pozlama/ton eğrisi hatası düzeltildi, K0 AI teslim paketi (29 Ekim 2026, gece)
+
+**Notlar (geri bildirim).** (1) Tur 2.1'deki hayalet ölçümü yalnız sol bandı (üst %45, sol %58) kapsıyordu; v1'in K1 hatası sağ kenardaydı → ölçüm **üç banda** çıkarıldı: sol, **sağ** (x ≥ %83, üst %40 — K1 proxy yan yüzü bölgesi), üst (tam genişlik, üst %30). Maske kutusu (K0 ürün matı) x %60.8–80.2, y %41.1–71.3; bantlar maskenin dışında. (2) K1→K2 orta noktasında K0 plakasının payı **%21.6** (tablo Tur 2.1). Ağırlık formülü bu turda değiştirilmedi; bu katkının ara karelerde görünür ikilenme üretip üretmediği aşağıda sağ/üst bant ve kırpmalarla ölçüldü (üretmiyor). Gerekirse K0 plakası yalnız K0→K1 bacağında etkin olacak şekilde sınırlanabilir; yapılmadı (yeni projeksiyon geliştirmesi istenmedi).
+
+**Sağ bant bulgusu → hayalet değil, pozlama/ton eğrisi hatası.** v2.1'de sağ bant farkı K0'da 3.7 iken K1 civarında **10–14.5**'e çıkıyordu (kare 18: 11.9, 24: 12.6, 30: 10.0; v1: 14.5 / 11.1 / 12.2). Kırpmalar (`Renders/gateA_hybrid/move_rightband_crops.png`): sütunun sağındaki gökyüzü v6'da mavi, hibritte siyaha yakın. Teşhis: katman haritası K1 (`k1_layermap_board.png`, `Scripts/ue_layermap_k1.py`) bölgenin uzak/gök katmanı olduğunu gösterdi; aynı yönde plaka örnekleri (`k1_exposure_diagnosis.png`) plakanın orada **parlak** olduğunu gösterdi; yani plaka doğru, projeksiyon koyu. Ölçüm: v6 / hibrit v2.1 gök kodu (0.5, 0.05): **24.8 / 8.2**, cephe (0.4, 0.22): **29.6 / 18.8** — uzak katman **her yerde ~2 stop koyu**, K0'da da (Tur 2.1'deki ~8'lik "taban fark" buydu; DoF/gürültü değil). Kalibrasyon render'ı: `ExposureComp` 2.5 → 4.5 stop ile gök 36.6 (fazla), cephe 59.1; noktalar 3.4–3.9 stop arası farklı kazanç istiyor → tek kazançla düzelmez. Sebep: MRQ'nun varsayılan EXR'si **ton eğrisi uygulanmış** (display-referred) değer taşıyor; projeksiyon bunu yayınca render ton eğrisini **ikinci kez** uyguluyor (toe → koyu gök).
+
+**Düzeltme (renk yönetimi, projeksiyon sistemi değişmedi).** `MRQ_Plate_Lin` (Path Tracer 512 spp, `MoviePipelineColorSetting.disable_tone_curve = True`, EXR sıkıştırmasız) ile üç plaka **scene-linear** yeniden render edildi (`Renders/plate_lin/`, LOCAL ONLY); `ue_hybrid.py` `VM_PLATE_DIR=plate_lin`. Linear EXR değerinin ton eğrisine giren pozlanmış sahne değerine eşit olduğu ölçüldü (gök noktalarında −0.04 / −0.11 stop) → `ExposureComp = 2^2.5` doğru ve kalibre. Sonuç (sRGB kod, v6 / hibrit v2.2):
+
+| Nokta | K0 | K1 | K2 |
+|---|---|---|---|
+| gök (0.3, 0.05) | 22.9 / 23.3 | 22.7 / 23.1 | 7.1 / 7.9 |
+| gök (0.5, 0.05) | 24.8 / 25.9 | 24.1 / 25.3 | 18.1 / 18.6 |
+| sağ üst (0.95, 0.05) | 16.7 / 15.2 | 17.1 / 15.5 | 17.5 / 15.9 |
+| sağ (0.95, 0.25) | 33.8 / 32.7 | 23.9 / 22.4 | 24.6 / 24.1 |
+| cephe (0.4, 0.22) | 29.6 / 34.9 | 21.2 / 23.6 | 36.2 / 41.0 |
+
+**Hayalet ölçümü v2.2 (üç bant, kare başına ortalama |hibrit − v6|, 0–255; `move_diff.csv/.png`).**
+
+| kare | sol v1 / v2.1 / **v2.2** | sağ v1 / v2.1 / **v2.2** | üst **v2.2** |
+|---|---|---|---|
+| 0 (K0) | 8.2 / 8.2 / **3.3** | 3.6 / 3.7 / **1.1** | 1.7 |
+| 12 (K0→K1 orta) | 8.4 / 8.6 / **3.4** | 6.2 / 5.8 / **1.5** | 1.7 |
+| 18 | 8.4 / 8.5 / **3.6** | 14.5 / 11.9 / **2.2** | 1.8 |
+| 24 (K1) | 8.2 / 8.1 / **3.5** | 11.1 / 12.6 / **2.3** | 1.8 |
+| 30 | 8.5 / 8.6 / **3.8** | 12.2 / 10.0 / **1.9** | 1.9 |
+| 36 (K1→K2 orta) | 9.0 / 9.1 / **4.4** | 8.0 / 7.4 / **1.6** | 1.9 |
+| 47 (K2) | 7.6 / 7.8 / **4.0** | 4.3 / 4.0 / **1.4** | 1.8 |
+
+Sağ bant K1'de 12.6 → **2.3**, sıçrama yok; üst bant düz. Kalan sol bant farkı (3.3–4.4) alan derinliği/bokeh ve PT gürültüsünden; orta noktalarda (12, 36) kırpmalar gözle kontrol edildi, ikilenme yok. **Ara hareketlerde hayalet: yok (PASS, bu kez üç bantla).** Stiller, hareket, web önizlemesi (`web/`, hybrid2 = v2.2), dörtlü levha ve kontakt sayfaları yeniden üretildi; 2.1 çıktıları yerelde `stills_round21/`, `move_round21/`.
+
+**Ters ton eğrisi (AI PNG → EXR için).** `Scripts/exr_tools.py fitlut` scene-linear plaka EXR'si ile aynı karenin MRQ PNG'sinden piksel-hizalı ters dönüşüm tablosu çıkardı: `reports/display_inverse_lut.json` (256 kod × RGB, ortalama bağıl hata %2.5). Kod 0 → 0.0019, 25 → 0.0283, 128 → 0.194, 255 → 11.1: toe ve shoulder var; düz sRGB çözme (kod 25 → 0.0097) 1.5 stop koyu kalırdı. Dönüştürücü doğrulandı: sentetik 8/16-bit PNG'ler (5 filtre tipi) → EXR → PNG gidiş-dönüş, 8-bit 0/255 kod hatası, half hassasiyeti < %0.05 (`Scripts/test_exr_tools.py`); 4096×2304 dönüşüm 5 s. Üretilen EXR'ler Unreal'in kendi plaka içe aktarımıyla aynı yoldan (`import_plate`, TC_HDR) alınır.
+
+**K0 teslim paketi (harici görsel AI için) — hazır.** `Renders/plate/handoff_K0/` (LOCAL ONLY, 18 MB): `K0_beauty_4096x2304_sRGB.png` (**yüklenecek ana dosya**, maskesiz/yazısız, 24 mm K0), `K0_depth_lognorm_16bit.png` (+8 bit; `M_PP_DepthNorm`, yakın = beyaz, log 4–800 m), `K0_normal_world.png`, `K0_segmentation.png` (`L_Hero_Plate_Seg`: düz renk sınıflar; plakada su yok, su gerçek yakın katman), `K0_preview_board.png`. Kadraj sabitleri (ufuk %45.7, hero kadrajı merkezî %57.1, ay %34.3/%24.3), prompt, çıktı özelliği, dönüşüm komutları ve teslim-alma kontrol listesi: **`docs/hybrid/AI_PLATE_HANDOFF_K0.md`**. Kontrol levhası: `Scripts/check_ai_plate.ps1` (bölütleme kenarı bindirme, ufuk çizgisi, bant parlaklıkları; kendi kendine test geçti).
+
+**Durum.** AI görüntüsü henüz yok → kalite sıçraması yok → **FAIL devam**. Bu turda değişmeyenler: maske, örgüler, yakın 3D, ışıklar, `L_Hero`. Yeni: `L_Hero_Plate_Seg` (bölütleme), `M_PP_DepthNorm`, `MRQ_AOV_Plate`/`MRQ_Seg_Plate`/`MRQ_Plate_Lin` konfigleri, `L_Hero_LayerMap`'e K1/K2 kameraları.
+
 ## Tur 2.1 — plaka ağırlıkları düzeltmesi ve AI çevre durumu (29 Ekim 2026, gece)
 
 **Plaka karışımı hatası (doğrulandı, düzeltildi).** Tur 2'deki `w = 1/(d²+1)` (d metre) ile K1'de K1 plakası yalnızca **%38.2** taşıyordu (K0 %31.8, K2 %30.0); "tek plaka baskın" ifadesi yanlıştı. Yeni ağırlık `w = 1/(d⁴ + 1e-6)`, normalize. Ölçülen paylar (`Scripts/plate_weights.py` → `reports/plate_weights.txt`):

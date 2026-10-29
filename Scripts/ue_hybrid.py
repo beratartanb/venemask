@@ -235,7 +235,10 @@ def build_projection_material(plates):
     half = const(0.5)
     big = const(400.0)
     one = const(1.0)
-    comp = e(unreal.MaterialExpressionScalarParameter, parameter_name="ExposureComp", default_value=2.0 ** 2.5)
+    # VM_EXPCOMP_STOPS: gain applied to the plate radiance before the render camera's EV -2.5 (calibrated empirically
+    # against v6 sky/facade codes, see reports/gate-A-hybrid.md "Tur 2.2")
+    comp = e(unreal.MaterialExpressionScalarParameter, parameter_name="ExposureComp",
+             default_value=2.0 ** float(os.environ.get("VM_EXPCOMP_STOPS", "2.5")))
     fx = e(unreal.MaterialExpressionScalarParameter, parameter_name="FX", default_value=24.0 / SENSOR[0])
     fy = e(unreal.MaterialExpressionScalarParameter, parameter_name="FY", default_value=24.0 / SENSOR[1])
 
@@ -346,8 +349,11 @@ def stage_plate():
     keys = os.environ.get("VM_PLATES", "K0,K1,K2").split(",")
     files = {"K0": "L_Hero_Plate_LS_Plate_.0000.exr", "K1": "L_Hero_Plate_LS_Plate_K1_.0000.exr", "K2": "L_Hero_Plate_LS_Plate_K2_.0000.exr"}
     plates = []
+    # VM_PLATE_DIR: plate (default EXR, tone curve baked in) or plate_lin (MRQ_Plate_Lin, scene-linear).
+    # VM_PLATE_K0=../plate/ai/K0_ai.exr swaps in an externally generated plate (relative to that directory).
+    pdir = os.path.join(ROOT, "Renders", os.environ.get("VM_PLATE_DIR", "plate"))
     for k in keys:
-        exr = os.path.join(ROOT, "Renders", "plate", files[k])
+        exr = os.path.normpath(os.path.join(pdir, os.environ.get("VM_PLATE_" + k, files[k])))
         assert os.path.exists(exr), "missing plate " + exr
         plates.append((import_plate(exr, "T_Plate_" + k), PLATE_CAMS[k][0], PLATE_CAMS[k][1]))
     mat = build_projection_material(plates)
@@ -407,7 +413,8 @@ elif STAGE == "plates":
     stage_plates()
 elif STAGE == "layermap":
     stage_layermap()
-else:
+elif STAGE == "plate":
     stage_plate()
-with open(os.path.join(ROOT, "reports", "ue_hybrid_%s.txt" % STAGE), "w") as f:
-    f.write("\n".join(REPORT))
+if STAGE != "none":   # VM_STAGE=none: imported as a helper module (ue_plate_aov.py)
+    with open(os.path.join(ROOT, "reports", "ue_hybrid_%s.txt" % STAGE), "w") as f:
+        f.write("\n".join(REPORT))

@@ -1,0 +1,13 @@
+depth material /Game/Venemask/Materials/M_PP_DepthNorm near_m 4.0 far_m 800.0
+sequence /Game/Venemask/Cinematics/LS_Plate_Seg frames 1
+segmentation level built; material slots per category: [('interior', 266), ('lit_window_lamp', 101), ('moon', 1), ('plaster_facade', 22), ('sky', 1), ('stone', 331), ('wood_pole', 32)]
+colour water (0.0, 0.25, 1.0)
+colour sky (0.45, 0.0, 0.9)
+colour moon (1.0, 1.0, 0.1)
+colour lit_window_lamp (1.0, 0.45, 0.0)
+colour stone (0.6, 0.6, 0.6)
+colour plaster_facade (1.0, 0.0, 0.0)
+colour wood_pole (0.5, 0.22, 0.0)
+colour interior (0.0, 0.55, 0.0)
+colour product (1.0, 1.0, 1.0)
+colour other (0.0, 1.0, 1.0)

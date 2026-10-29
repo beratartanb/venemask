@@ -2,6 +2,10 @@
 
 A separate Unreal Engine 5.8 project for the Venemask cinematic store experience. Order of work: (1) one correct product + hero render → (2) camera route → (3) Shopify.
 
+## Gate A-HYBRID round 2.2: far layer was 2 stops dark (tone-curved EXR projected and tone-mapped again) → scene-linear plates; 3-band ghosting check; K0 AI handoff package ready
+- Hand-off for the external image tool: [docs/hybrid/AI_PLATE_HANDOFF_K0.md](docs/hybrid/AI_PLATE_HANDOFF_K0.md) (files in `Renders/plate/handoff_K0/`, local only) · PNG→EXR with the measured inverse display transform: [Scripts/exr_tools.py](Scripts/exr_tools.py), [reports/display_inverse_lut.json](reports/display_inverse_lut.json)
+- Diagnosis boards: [k1_exposure_diagnosis.png](Renders/gateA_hybrid/k1_exposure_diagnosis.png) · [move_rightband_crops.png](Renders/gateA_hybrid/move_rightband_crops.png) · updated [move_diff.png](Renders/gateA_hybrid/move_diff.png), [compare_fourway_K012.png](Renders/gateA_hybrid/compare_fourway_K012.png), [web preview](Renders/gateA_hybrid/web/index.html)
+
 ## Gate A-HYBRID round 2.1: plate weights corrected (pose plate = 100 %), blend measured against v6 per frame; AI plate still BLOCKED
 - Weight table: [reports/plate_weights.txt](reports/plate_weights.txt) · per-frame far-layer difference vs v6: [move_diff.png](Renders/gateA_hybrid/move_diff.png)
 

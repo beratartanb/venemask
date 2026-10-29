@@ -15,10 +15,15 @@ eas = unreal.get_editor_subsystem(unreal.EditorAssetSubsystem)
 DEFAULT = ("MRQ_Lumen:lumen:8:1600x900:lumen_preview;MRQ_PT:pt:256:1920x1080:pt_beauty;MRQ_AOV:aov:8:1920x1080:aov;"
            # hybrid test set: plate (wide, high spp), K-pose stills (named by level + sequence), camera-move sequences
            "MRQ_Plate:pt:512:4096x2304:plate:1;MRQ_PT_K:pt:256:1920x1080:gateA_hybrid/stills:1;"
-           "MRQ_AOV_K:aov:8:1920x1080:gateA_hybrid/aov:1;MRQ_PT_Move:pt:96:1280x720:gateA_hybrid/move:48")
+           "MRQ_AOV_K:aov:8:1920x1080:gateA_hybrid/aov:1;MRQ_PT_Move:pt:96:1280x720:gateA_hybrid/move:48;"
+           # plate-camera data passes for the external AI plate (depth/normal, flat segmentation level)
+           "MRQ_AOV_Plate:aov:8:4096x2304:plate/aov:1;MRQ_Seg_Plate:lumen:1:4096x2304:plate/seg:1;"
+           # scene-linear plates for the projection (see ue_hybrid.py stage_plate, VM_PLATE_DIR=plate_lin)
+           "MRQ_Plate_Lin:ptlin:512:4096x2304:plate_lin:1")
 
 
 def make(name, mode, spp, res, tag, frames="1"):
+    """mode: pt | lumen | aov | ptlin (Path Tracer, EXR only, tone curve disabled -> scene-linear plates)"""
     w, h = (int(v) for v in res.split("x"))
     path = DEST + "/" + name
     if eas.does_asset_exist(path):
@@ -54,19 +59,32 @@ def make(name, mode, spp, res, tag, frames="1"):
         cfg.find_or_add_setting_by_class(unreal.MoviePipelineDeferredPass_PathTracer)
         cfg.find_or_add_setting_by_class(unreal.MoviePipelineImageSequenceOutput_PNG)
         cfg.find_or_add_setting_by_class(unreal.MoviePipelineImageSequenceOutput_EXR)
+    elif mode == "ptlin":
+        # The default EXR carries the display transform (tone curve); projecting it and rendering again applies
+        # the curve twice (measured: far layer 2 stops dark at ExposureComp 2.5, 1 stop bright at 4.5).
+        # Tone curve off -> scene-linear EXR; no PNG (it would be linear too, use the matching MRQ_Plate PNG).
+        cfg.find_or_add_setting_by_class(unreal.MoviePipelineDeferredPass_PathTracer)
+        col = cfg.find_or_add_setting_by_class(unreal.MoviePipelineColorSetting)
+        col.disable_tone_curve = True
+        ex = cfg.find_or_add_setting_by_class(unreal.MoviePipelineImageSequenceOutput_EXR)
+        ex.compression = unreal.EXRCompressionFormat.NONE
     else:
         dp = cfg.find_or_add_setting_by_class(unreal.MoviePipelineDeferredPassBase)
         if mode == "aov":
             mats = []
             for p in ("/Game/Venemask/Materials/M_PP_WorldNormal.M_PP_WorldNormal",
                       "/Game/Venemask/Materials/M_PP_ProductMatte.M_PP_ProductMatte",
+                      "/Game/Venemask/Materials/M_PP_DepthNorm.M_PP_DepthNorm",   # ue_plate_aov.py; skipped if absent
                       "/MovieRenderPipeline/Materials/MovieRenderQueue_WorldDepth.MovieRenderQueue_WorldDepth"):
+                if not eas.does_asset_exist(p.split(".")[0]):
+                    continue
                 pp = unreal.MoviePipelinePostProcessPass()
                 pp.enabled = True
                 pp.material = unreal.load_asset(p)
                 mats.append(pp)
             dp.set_editor_property("additional_post_process_materials", mats)
-            cfg.find_or_add_setting_by_class(unreal.MoviePipelineImageSequenceOutput_EXR)
+            ex = cfg.find_or_add_setting_by_class(unreal.MoviePipelineImageSequenceOutput_EXR)
+            ex.compression = unreal.EXRCompressionFormat.NONE   # readable by the pure-Python tools (Scripts/exr_tools.py)
         cfg.find_or_add_setting_by_class(unreal.MoviePipelineImageSequenceOutput_PNG)
     eas.save_loaded_asset(cfg)
     unreal.log("[VENEMASK] config %s mode=%s spp=%s %s -> Renders/%s" % (path, mode, spp, res, tag))

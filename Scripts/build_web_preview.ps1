@@ -7,7 +7,7 @@ $W = "$H\web"
 $sets = @(
     @{ key = "v6";          src = "$H\move";             pat = "L_Hero_LS_Move_PathTracer.{0:D4}.png";               label = "v6 tam geometri" },
     @{ key = "hybrid1";     src = "$H\move_singleplate"; pat = "L_Hero_Hybrid_LS_Move_Hybrid_PathTracer.{0:D4}.png"; label = "hibrit v1 (tek plaka)" },
-    @{ key = "hybrid2";     src = "$H\move";             pat = "L_Hero_Hybrid_LS_Move_Hybrid_PathTracer.{0:D4}.png"; label = "hibrit v2 (3 plaka, kamera-mesafe karışımı)" }
+    @{ key = "hybrid2";     src = "$H\move";             pat = "L_Hero_Hybrid_LS_Move_Hybrid_PathTracer.{0:D4}.png"; label = "hibrit v2.2 (3 plaka, scene-linear plaka, kamera-mesafe karisimi)" }
 )
 $enc = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq 'image/jpeg' }
 $ep = New-Object System.Drawing.Imaging.EncoderParameters 1
@@ -38,7 +38,7 @@ input{width:100%}label{color:#9a9184;display:block;margin-bottom:4px}button{back
 <div class="row">
 <div><label>v6 tam geometri</label><img id="a"></div>
 <div><label>hibrit v1 — tek plaka (K1'de proxy yan yüzü hatası)</label><img id="b"></div>
-<div><label>hibrit v2 — 3 plaka, kamera-mesafe karışımı</label><img id="c"></div>
+<div><label>hibrit v2.2 — 3 plaka, scene-linear plaka, kamera-mesafe karışımı</label><img id="c"></div>
 </div>
 <p><button id="play">Oynat</button><span id="t"></span></p>
 <input id="s" type="range" min="0" max="47" value="0">
