@@ -2,6 +2,9 @@
 
 A separate Unreal Engine 5.8 project for the Venemask cinematic store experience. Order of work: (1) one correct product + hero render → (2) camera route → (3) Shopify.
 
+## Gate A-HYBRID round 2.1: plate weights corrected (pose plate = 100 %), blend measured against v6 per frame; AI plate still BLOCKED
+- Weight table: [reports/plate_weights.txt](reports/plate_weights.txt) · per-frame far-layer difference vs v6: [move_diff.png](Renders/gateA_hybrid/move_diff.png)
+
 ## Gate A-HYBRID round 2: K1 fixed with 3-plate projection; AI plate BLOCKED (no image tool/access); quality jump FAIL
 - Four-way K0/K1/K2: [compare_fourway_K012.png](Renders/gateA_hybrid/compare_fourway_K012.png) · complete camera-test web preview: [Renders/gateA_hybrid/web/index.html](Renders/gateA_hybrid/web/index.html)
 

@@ -265,10 +265,14 @@ def build_projection_material(plates):
         link(uv, "", plate, "UVs")
         valid = op(unreal.MaterialExpressionMultiply, op(unreal.MaterialExpressionMultiply, inside(u), inside(v)),
                    un(unreal.MaterialExpressionSaturate, op(unreal.MaterialExpressionMultiply, dx, big)))
-        # distance from the rendering camera to this plate's camera, in metres -> 1/(d^2+1)
+        # distance from the rendering camera to this plate's camera, in metres -> 1/(d^4 + 1e-6).
+        # Measured shares (Scripts/plate_weights.py): at K0/K1/K2 the pose's own plate = 100.0 %, the
+        # others 0.0 %; K0-K1 midpoint 47/47/6 %, K1-K2 midpoint 22/39/39 %.
+        # (The earlier 1/(d^2+1) gave the pose plate only 37-38 %.)
         dist = op(unreal.MaterialExpressionDistance, camws, cam, "", "RGB")
         dm = op(unreal.MaterialExpressionDivide, dist, const(100.0))
-        w = op(unreal.MaterialExpressionDivide, one, op(unreal.MaterialExpressionAdd, op(unreal.MaterialExpressionMultiply, dm, dm), one))
+        d2 = op(unreal.MaterialExpressionMultiply, dm, dm)
+        w = op(unreal.MaterialExpressionDivide, one, op(unreal.MaterialExpressionAdd, op(unreal.MaterialExpressionMultiply, d2, d2), const(1e-6)))
         w = op(unreal.MaterialExpressionMultiply, w, valid)
         colours.append(op(unreal.MaterialExpressionMultiply, op(unreal.MaterialExpressionMultiply, plate, comp, "RGB", ""), w))
         weights.append(w)

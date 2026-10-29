@@ -1,5 +1,28 @@
 # GATE A-HYBRID — hibrit çevre denemesi (v6 üzerine)
 
+## Tur 2.1 — plaka ağırlıkları düzeltmesi ve AI çevre durumu (29 Ekim 2026, gece)
+
+**Plaka karışımı hatası (doğrulandı, düzeltildi).** Tur 2'deki `w = 1/(d²+1)` (d metre) ile K1'de K1 plakası yalnızca **%38.2** taşıyordu (K0 %31.8, K2 %30.0); "tek plaka baskın" ifadesi yanlıştı. Yeni ağırlık `w = 1/(d⁴ + 1e-6)`, normalize. Ölçülen paylar (`Scripts/plate_weights.py` → `reports/plate_weights.txt`):
+
+| Kamera konumu | K0 plakası | K1 plakası | K2 plakası |
+|---|---|---|---|
+| K0 | **100.0 %** | 0.0 % | 0.0 % |
+| K1 | 0.0 % | **100.0 %** | 0.0 % |
+| K2 | 0.0 % | 0.0 % | **100.0 %** |
+| K0→K1 %25 / %50 / %75 | 98.8 / 47.3 / 1.2 % | 1.2 / 47.3 / 98.8 % | ~0 / 5.5 / ~0 % |
+| K1→K2 %25 / %50 / %75 | 1.1 / 21.6 / 1.3 % | 98.6 / 39.2 / 1.3 % | 0.3 / 39.2 / 97.4 % |
+
+Kamera noktalarında doğru plaka %100; ara hareketlerde iki plaka yalnızca orta noktalar civarında karışır. Karışımın hayalet üretip üretmediği **ölçüldü**: `Scripts/move_diff.ps1`, 48 karenin her birinde uzak katman bandında (üst %45, sol %58; maske ve paye dışarıda) hibrit ile v6 tam geometri arasındaki ortalama mutlak fark (`Renders/gateA_hybrid/move_diff.csv`, `move_diff.png`). Sonuçlar aşağıda "Tur 2.1 ölçüm" bölümünde.
+
+**AI çevre görüntüsü — hâlâ BLOCKED.** Bu turda yeni altyapı denemesi yapılmadı. Hesapta etkin görüntü üretim eklentisi yok (`ListPlugins` boş), makinede yerel üretici yok, API anahtarı yok. Gereken, net olarak:
+- **Araç:** eklenti kataloğundaki *Runway API Skills* (image-to-image + referans), *Kling AI* (referans görselden üretim), *MuAPI* (`edit-image`: inpainting/outpainting) veya *CellCog* — biri hesap/API anahtarıyla etkinleştirilmeli. Alternatif: dışarıda üretilip dosya olarak verilmesi.
+- **Girdiler (hazır, depoda/yerelde):** `Renders/plate/L_Hero_Plate_LS_Plate_PathTracer.0000.png` + `_K1_` + `_K2_` (24 mm, 4096×2304, aynı üç kamera; img2img için yapı/perspektif kaynağı), `Renders/gateA_hybrid/aov/*WorldDepth*` (derinlik), `references/02-venetian-hero-wide-space.jpeg` (yalnızca stil; maske/yazı alınmayacak).
+- **İstenen çıktı:** her üç kamera için aynı Venedik ortamı (aynı binalar, pencereler, ışıklar), maskesiz/yazısız, 4096×2304, PNG (sRGB) veya EXR (linear). Tutarlılık için K0 üretilir, K1/K2 **K0 çıktısından** img2img + düşük denoise ile aynı kameraya göre türetilir (bağımsız üretim yok). Script `T_Plate_K0/K1/K2` dokularını değiştirir; sRGB gelirse linear'a çevrilir, `ExposureComp` ile pozlama eşitlenir.
+
+**Tur 2.1 ölçüm (hayalet kontrolü).** Yeni ağırlıklarla K0/K1/K2 stilleri ve 48 karelik hareket yeniden render edildi (`stills/`, `move/`, web önizlemesi güncellendi). Uzak katman bandında v6'ya göre ortalama mutlak fark, kare başına (0–255): kare 0: 8.2 · 6: 8.6 · 12 (K0→K1 orta nokta, %47/%47 karışım): 8.6 · 18: 8.5 · 24 (K1): 8.1 · 30: 8.6 · 36 (K1→K2 orta nokta, %39/%39): 9.1 · 42: 8.3 · 47 (K2): 7.8. Eğri düz; orta noktalarda sıçrama yok (`move_diff.png`, `move_diff.csv`). Taban fark (~8) alan derinliği/gürültü farkından gelir ve plaka karışımından bağımsızdır (tek plakalı v1 de aynı bandda 7.6–9.0 verir; v1'in K1 hatası sağ kenardaydı, bu bant sol %58'i ölçer). Orta nokta kareleri (12, 36) gözle de kontrol edildi: çift pencere/çift fener yok. **Ara hareketlerde hayalet: yok (PASS).**
+
+Yeni çevre üretilmediği için bu turda **kalite sıçraması yok → FAIL devam**. Maske, örgüler ve yakın 3D değişmedi.
+
 ## Tur 2 güncellemesi (29 Ekim 2026, akşam)
 
 **1 · AI çevre görüntüsü — BLOCKED.** Bu oturumda görüntü üretim aracı yok: makinede yerel Stable Diffusion/ComfyUI/InvokeAI kurulumu bulunamadı, ortamda API anahtarı yok (OpenAI/Stability/Replicate/fal/Runway/Kling/Blockade), Claude Code oturumunda görüntü üreten bir araç/bağlayıcı etkin değil. Eski sahne yeniden render edilip "AI çevre" olarak **sunulmadı**. Gereken erişim: eklenti kataloğundaki görüntü üreticilerinden biri (Runway API Skills, Kling AI, MuAPI veya CellCog) hesap/API anahtarıyla etkinleştirilmeli; ya da `Renders/plate/L_Hero_Plate_LS_Plate_PathTracer.0000.png` (24 mm K0 plakası) referans alınarak dışarıda üretilmiş, maskesiz/yazısız bir matte (tercihen aynı kadraj, 4096×2304, linear EXR veya sRGB PNG) `Renders/plate/` altına konmalı. sRGB geldiğinde script linear'a çevirir ve `ExposureComp` ile pozlama eşitlenir; perspektif eşleşmesi için K1/K2 plakaları da aynı yöntemle (img2img, aynı kamera) üretilmelidir.
