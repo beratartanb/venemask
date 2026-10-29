@@ -1,8 +1,21 @@
-SM_CasanovaBauta triangles lod0 809547 verts; nanite False
-SM_LedgeCap triangles lod0 73333 verts; nanite False
-SM_ParapetBody triangles lod0 16391 verts; nanite False
-SM_Pier triangles lod0 26685 verts; nanite False
-SM_FloorSlab triangles lod0 9328 verts; nanite False
-mask yaw 145.0 back dir (0.5735764363510459, 0.8191520442889919) pier centre (13.356539508813352, 19.075115276484098)
-camera focus distance 141.781005859375
+SM_CasanovaBauta verts lod0 809547
+SM_CasanovaBraid verts lod0 32556
+SM_LedgeCap verts lod0 26347
+SM_LedgeCap2 verts lod0 29474
+SM_LedgeCap3 verts lod0 24604
+SM_ParapetBody verts lod0 16391
+SM_PierCourse verts lod0 9960
+SM_PierCourse2 verts lod0 9959
+SM_FloorSlab verts lod0 9328
+SM_Rustic verts lod0 4988
+SM_ArchRound verts lod0 256
+SM_ArchGothic verts lod0 256
+SM_ArchGothicBig verts lod0 256
+SM_Column verts lod0 398
+SM_ColumnSlim verts lod0 398
+SM_Cornice verts lod0 40
+SM_Paline verts lod0 218
+SM_Bridge verts lod0 282
+mask yaw 145.0 back dir (0.5735764363510459, 0.8191520442889919)
+camera (-150.0, -75.0, 130.0) focal 42.0 focus distance 161.9579620361328
 sequence /Game/Venemask/Cinematics/LS_Hero.LS_Hero

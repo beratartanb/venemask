@@ -20,3 +20,4 @@ Renders/**/*.exr
 
 __pycache__/
 *.pyc
+*.bak

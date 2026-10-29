@@ -16,7 +16,6 @@
   .grid { display:grid; gap:12px; }
   .g2 { grid-template-columns:repeat(2, minmax(0,1fr)); }
   .g3 { grid-template-columns:repeat(3, minmax(0,1fr)); }
-  .g4 { grid-template-columns:repeat(4, minmax(0,1fr)); }
   figure { margin:0; }
   img { width:100%; display:block; border:1px solid var(--line); background:#000; }
   figcaption { font:12px/1.4 system-ui, sans-serif; color:var(--muted); padding:6px 2px; }
@@ -24,59 +23,55 @@
   td, th { border-bottom:1px solid var(--line); padding:7px 8px; text-align:left; vertical-align:top; }
   th { color:var(--muted); font-weight:500; }
   .ok { color:var(--ok); } .fail { color:var(--fail); } .warn { color:var(--warn); }
-  @media (max-width:900px) { .g2, .g3, .g4 { grid-template-columns:1fr; } }
+  @media (max-width:900px) { .g2, .g3 { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
 <main>
-  <h1>VENEMASK — Gate A · Hero</h1>
-  <p class="muted">29 Ekim 2026 · Unreal Engine 5.8.1 · Path Tracer · 1920×1080 · 256 spp · OIDN denoise · Cine Camera 60 mm f/4</p>
-  <p><span class="verdict">GATE A: FAIL — referans sınıfına henüz ulaşmadı</span></p>
+  <h1>VENEMASK — Gate A · Hero · tur 2 (v6)</h1>
+  <p class="muted">29 Ekim 2026 · Unreal Engine 5.8.1 · Path Tracer 256 spp · 1920×1080 · Cine Camera 42 mm f/6.3 · gerçek Casanova Bauta STL + fotoğraftan türetilen şerit geometrisi</p>
+  <p><span class="verdict">GATE A: FAIL — yapı ve ürün doğru, malzeme zenginliği referansın altında</span></p>
 
-  <h2>1 · Referans ↔ gerçek Unreal render (aynı genişlikte)</h2>
-  <div class="grid g3">
-    <figure><img src="../references/02-venetian-hero-wide-space.jpeg" alt="Referans 02"><figcaption>Referans 02 — sanat yönü (ürün değil)</figcaption></figure>
-    <figure><img src="../Renders/gateA/hero_v5_pathtracer_1920.png" alt="Unreal Path Tracer render"><figcaption>Unreal 5.8 Path Tracer — gerçek Casanova Bauta geometrisi</figcaption></figure>
-    <figure><img src="../references/01-multi-mask-room-and-product-showcase.jpeg" alt="Referans 01"><figcaption>Referans 01 — sanat yönü (ürün değil)</figcaption></figure>
+  <h2>1 · Referans 02 ↔ Unreal render (aynı yükseklik)</h2>
+  <figure><img src="../Renders/gateA/compare_reference_v6.png" alt="Referans 02 ve render"><figcaption>Sol: referans 02 (yalnızca sanat yönü, ürün değil). Sağ: Path Tracer v6.</figcaption></figure>
+
+  <h2>2 · Ürün doğruluğu: mağaza fotoğrafı ↔ render ↔ yan fotoğraf (maske aynı yükseklikte)</h2>
+  <figure><img src="../Renders/gateA/compare_product_v6.png" alt="Ürün karşılaştırması"><figcaption>venemask.com fotoğraf 01 · Unreal render · fotoğraf 03. Bukleler, şapka, göz açıklıkları, burun birebir STL'den.</figcaption></figure>
+  <figure><img src="../Renders/gateA/compare_detail_v6.png" alt="Şerit ve çatlak yakın plan"><figcaption>Yakın plan: şapka kenarı altın scroll şerit + band gimp ve craquelure. Render şeritleri STL kenarlarına oturtulmuş geometri.</figcaption></figure>
+
+  <h2>3 · Tam kare ve kontrol pass'leri</h2>
+  <div class="grid g2">
+    <figure><img src="../Renders/gateA/hero_v6_pathtracer_1920.png" alt="Path Tracer v6"><figcaption>Path Tracer beauty (EXR yanında)</figcaption></figure>
+    <figure><img src="../Renders/gateA/hero_v6_worldnormal.png" alt="World normal"><figcaption>World normal — mimari parçalar (kemer, sütun, korniş, köprü, kazıklar), ashlar bloklar, tam çözünürlüklü maske</figcaption></figure>
+    <figure><img src="../Renders/gateA/hero_v6_productmatte.png" alt="Ürün matte"><figcaption>Ürün matte (maske + şerit, custom stencil 1)</figcaption></figure>
+    <figure><img src="../Renders/gateA/hero_v6_lumen_preview.png" alt="Lumen önizleme"><figcaption>Lumen önizleme (aynı kamera)</figcaption></figure>
   </div>
 
-  <h2>2 · Ürün doğruluğu: mağaza fotoğrafı ↔ render ↔ kaynak mesh</h2>
-  <div class="grid g4">
-    <figure><img src="../SourceAssets/casanova_bauta/01_42829468205139.jpg" alt="Ürün fotoğrafı ön 3/4"><figcaption>venemask.com ürün fotoğrafı (ön 3/4)</figcaption></figure>
-    <figure><img src="../SourceAssets/casanova_bauta/03_42829468237907.jpg" alt="Ürün fotoğrafı yan"><figcaption>venemask.com ürün fotoğrafı (yan)</figcaption></figure>
-    <figure><img src="../SourceAssets/casanova_bauta/inspect/seg_front.png" alt="Segmentasyon ön"><figcaption>STL + boya bölgeleri (ön, ortografik)</figcaption></figure>
-    <figure><img src="../SourceAssets/casanova_bauta/inspect/seg_side.png" alt="Segmentasyon yan"><figcaption>STL + boya bölgeleri (yan)</figcaption></figure>
+  <h2>4 · Önceki tur (v5) ile karşılaştırma</h2>
+  <div class="grid g2">
+    <figure><img src="../Renders/gateA/hero_v5_pathtracer_1920.png" alt="v5"><figcaption>v5 — blok mimari, parlak paye, boş arka plan</figcaption></figure>
+    <figure><img src="../Renders/gateA/hero_v6_pathtracer_1920.png" alt="v6"><figcaption>v6 — loggia, ashlar korkuluk, Venedik cepheleri, yan kanal + köprü, kubbe + çan kulesi, ay, su yansımaları</figcaption></figure>
   </div>
 
-  <h2>3 · Kontrol pass'leri</h2>
-  <div class="grid g3">
-    <figure><img src="../Renders/gateA/hero_v5_worldnormal.png" alt="World normal"><figcaption>World normal — tam çözünürlüklü geometri (809k vertex, Nanite kapalı)</figcaption></figure>
-    <figure><img src="../Renders/gateA/hero_v5_productmatte.png" alt="Ürün matte"><figcaption>Ürün matte (custom stencil 1)</figcaption></figure>
-    <figure><img src="../Renders/gateA/hero_v5_lumen_preview.png" alt="Lumen önizleme"><figcaption>Lumen önizleme (aynı kamera; Path Tracer ile karşılaştırma)</figcaption></figure>
-  </div>
-
-  <h2>4 · Kontrol listesi</h2>
+  <h2>5 · Kontrol listesi</h2>
   <table>
     <tr><th>Madde</th><th>Durum</th><th>Kanıt / not</th></tr>
-    <tr><td>Gerçek ürün kimliği</td><td class="ok">PASS</td><td>Casanova Bauta Mask — Eyes Wide Shut Inspired · id 7591523549267 · SKU 17629779130_3E08 · 3799.00 (mağaza para birimi)</td></tr>
-    <tr><td>Geometri (form, göz açıklıkları, burun delikleri, 3+3 bukle, şapka kenarı)</td><td class="ok">PASS</td><td>Kendi baskı STL'iniz, şekil değiştirilmedi; yalnızca boya sınırlarında üçgen bölme (yüzey aynı). Normal pass'te görülür.</td></tr>
-    <tr><td>Boya bölgeleri (beyaz yüz, siyah lake şapka, altın bukleler)</td><td class="ok">PASS</td><td>Bukle sınırı derinlik ölçümüyle (inspect/curl_depth.png) belirlendi.</td></tr>
-    <tr><td>Altın şerit örgü (braid)</td><td class="warn">UNVERIFIED</td><td>Gerçek üründe uygulanan kumaş şerit; STL'de yok. Kenarda boyalı altın bant olarak yaklaşık gösterildi.</td></tr>
-    <tr><td>Craquelure deseni</td><td class="warn">UNVERIFIED</td><td>Prosedürel; gerçek ürünün çatlak dokusu taranmadı.</td></tr>
-    <tr><td>Fiziksel oturma</td><td class="ok">PASS</td><td>Çene taşa değiyor; maske serbest duramıyor (ağırlık merkezi tabanın arkasında), bu yüzden taş paye üzerine 12° yaslandı. Temas yansıması ve gölgesi Path Tracer'dan.</td></tr>
-    <tr><td>Işık: sıcak key + sıcak rim + soğuk gökyüzü dolgusu</td><td class="ok">PASS</td><td>Spot key 2900 K, spot rim 2400 K, soğuk rect fill 8000 K, uzak fenerler 2200 K.</td></tr>
-    <tr><td>Gerçek lens / alan derinliği</td><td class="ok">PASS</td><td>Cine Camera 60 mm, f/4, odak 142 cm (göz hizası); bokeh ve sudaki fener yansımaları fiziksel.</td></tr>
-    <tr><td>Kompozisyon / negatif alan</td><td class="warn">KISMEN</td><td>Maske sağ üçte birde, sol tarafta gökyüzü + kubbe; başlık için yer var. Ön plandaki taş çok karanlık.</td></tr>
-    <tr><td>Ortam zenginliği (mimari detay, cephe ışığı, malzeme çeşitliliği)</td><td class="fail">FAIL</td><td>Karşı kıyı düz siyah kütleler; kemer/sütun/cephe detayı yok; paye yüzeyi düz. Referanslardaki katmanlı derinlik yok.</td></tr>
-    <tr><td>Taş malzemesi gerçekçiliği</td><td class="fail">FAIL</td><td>Prosedürel doku; taranmış (Megascans/Fab) taş kullanılmadı — yakın planda yapay görünüyor.</td></tr>
+    <tr><td>Gerçek ürün kimliği</td><td class="ok">PASS</td><td>Casanova Bauta Mask — Eyes Wide Shut Inspired · id 7591523549267 · SKU 17629779130_3E08 · 3799.00</td></tr>
+    <tr><td>Geometri</td><td class="ok">PASS</td><td>Kendi baskı STL'iniz; şekil değiştirilmedi</td></tr>
+    <tr><td>Altın şeritler</td><td class="ok">PASS (geometri)</td><td>Brim scroll ~6.5 mm + dalgalı kordon; band gimp ~3.5 mm; ölçü ve yerleşim fotoğraf 01/03'ten. İplik dokusu prosedürel (UNVERIFIED).</td></tr>
+    <tr><td>Craquelure</td><td class="warn">UNVERIFIED</td><td>Ölçek ve renk fotoğraf 01 yakın planına göre; gerçek desen taranmadı</td></tr>
+    <tr><td>Altın bukleler</td><td class="ok">PASS</td><td>Mat varak, çukurlarda umber (fotoğraf 03)</td></tr>
+    <tr><td>Eklenmemiş süsleme</td><td class="ok">PASS</td><td>Tüy, taş, ek süs yok</td></tr>
+    <tr><td>Fiziksel oturma / temas gölgesi</td><td class="ok">PASS</td><td>Çene taşta; 12° yaslı; Path Tracer gölge + yansıma</td></tr>
+    <tr><td>Kadraj (ref 02)</td><td class="ok">PASS</td><td>Sağ üçte bir maske; solda yakın sütun, su, cepheler, kubbe, ay</td></tr>
+    <tr><td>Alan derinliği</td><td class="ok">PASS</td><td>f/6.3: arka plan yumuşak ama okunur</td></tr>
+    <tr><td>Mimari</td><td class="warn">KISMEN</td><td>Gerçek kemer/sütun/korniş/pencere parçaları; balkon, heykel, bacalar yok</td></tr>
+    <tr><td>Taş / su malzemesi</td><td class="warn">KISMEN</td><td>Ashlar derz, ıslaklık, kir bandı; taranmış doku yok</td></tr>
+    <tr><td>Referans sınıfı his</td><td class="fail">FAIL</td><td>Malzeme zenginliği ve atmosferik ışık referansın altında</td></tr>
   </table>
 
-  <h2>5 · Referansla en büyük 3 fark</h2>
-  <ol>
-    <li><b>Arka plan mimarisi:</b> referanslarda ışıklı cepheler, kemerler ve kubbe dokusu var; bizim karşı kıyı düz kütle + fener bokehi.</li>
-    <li><b>Taş ve yüzey dokusu:</b> referanstaki ıslak, oyulmuş, yaşlı taş hissi yok; prosedürel dokular yakında plastik/mantar gibi okunuyor.</li>
-    <li><b>Ön plan / katmanlar:</b> ref 02'de bulanık ikinci maske, kadife ve kenar ışığı alan katmanlar var; bizde ön plan kararıyor.</li>
-  </ol>
+  <h2>6 · Varlıklar</h2>
+  <p>Makinede bulunan Fab/Megascans içeriği orman temalı (yosun, kök, nehir kayaları); Venedik taşı/mimarisi için taranmış varlık yok. Fab indirmesi editör içinde Epic oturumu gerektirir. Tüm mimari ve dokular <code>Scripts/</code> altındaki üreteçlerden.</p>
 </main>
 </body>
 </html>

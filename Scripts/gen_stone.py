@@ -115,10 +115,15 @@ def block(name, size, radius, amp, step, seed):
 
 
 if __name__ == "__main__":
-    # parapet cap the mask sits on, the parapet body under it, the riser it leans on
-    block("SM_LedgeCap", (52, 320, 16), 2.2, 0.35, 0.8, 3)
+    # parapet cap the mask sits on: real ashlar blocks (joints are geometry near the camera)
+    block("SM_LedgeCap", (52, 104, 16), 1.6, 0.35, 0.8, 3)
+    block("SM_LedgeCap2", (52, 118, 16), 1.6, 0.35, 0.8, 4)
+    block("SM_LedgeCap3", (52, 96, 16), 1.6, 0.35, 0.8, 5)
     block("SM_ParapetBody", (44, 316, 92), 1.0, 0.6, 2.5, 7)
     block("SM_Riser", (24, 40, 26), 1.8, 0.3, 0.6, 13)
-    # loggia pier rising from the parapet; the mask leans against its face
-    block("SM_Pier", (30, 40, 240), 1.6, 0.45, 1.2, 17)
+    # loggia pier rising from the parapet (ashlar courses, 36 cm high)
+    block("SM_PierCourse", (36, 44, 36), 1.3, 0.4, 1.0, 17)
+    block("SM_PierCourse2", (36, 44, 36), 1.3, 0.4, 1.0, 19)
     block("SM_FloorSlab", (120, 120, 8), 0.8, 0.25, 2.0, 21)
+    # rusticated facade blocks for the far bank ground floor
+    block("SM_Rustic", (40, 120, 55), 3.5, 0.9, 2.5, 23)

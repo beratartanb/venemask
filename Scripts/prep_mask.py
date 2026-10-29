@@ -305,6 +305,8 @@ def main():
     bmin, bmax = meshlib.bounds(fv)
     rear = max(fv, key=lambda v: v[1])
     info = {
+        # STL mm -> placed cm: rotate about X by tilt, then (p - (cx, cy, zmin)) / 10. gen_braid.py reuses it.
+        "transform": {"tilt_rad": tilt, "cx_mm": cx, "cy_mm": cy, "zmin_mm": zmin},
         "lean_deg": LEAN_DEG,
         "rear_contact_cm": rear,
         "floor_contact_cm": [list(v) for v in fv if v[2] < 0.1][:5],
