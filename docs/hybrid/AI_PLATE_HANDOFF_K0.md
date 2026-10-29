@@ -1,6 +1,6 @@
 # K0 çevre plakası — harici görsel AI aracına teslim paketi
 
-Tarih: 2026-10-29 · Kaynak: `L_Hero_Plate` (v6 sahnesi, yakın katman ve maske çıkarılmış), `CAM_Plate` (K0 konumu, 24 mm) · Üretim: `Scripts/ue_plate_aov.py` + `MRQ_AOV_Plate` / `MRQ_Seg_Plate` · Dosyalar **LOCAL ONLY** (`Renders/plate/` depoda yok).
+Tarih: 2026-10-29 · Kaynak: `L_Hero_Plate` (v6 sahnesi, yakın katman ve maske çıkarılmış), `CAM_Plate` (K0 konumu, 24 mm) · Üretim: `Scripts/ue_plate_aov.py` + `MRQ_AOV_Plate` / `MRQ_Seg_Plate` · Teslim dosyaları depoda: `Renders/plate/handoff_K0/` (diğer `Renders/plate/` içeriği LOCAL ONLY).
 
 ## 1 · Dosyalar (`Renders/plate/handoff_K0/`)
 
