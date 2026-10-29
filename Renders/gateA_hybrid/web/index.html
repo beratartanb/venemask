@@ -1,0 +1,23 @@
+﻿<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Venemask K0-K1-K2</title>
+<style>body{margin:0;background:#0e0d0c;color:#e9e3d8;font:14px system-ui}main{max-width:1500px;margin:0 auto;padding:16px}
+.row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}img{width:100%;display:block;border:1px solid #2a2622;background:#000}
+input{width:100%}label{color:#9a9184;display:block;margin-bottom:4px}button{background:#2a2622;color:#e9e3d8;border:0;padding:6px 14px;margin-right:8px}
+@media(max-width:900px){.row{grid-template-columns:1fr}}</style></head><body><main>
+<h2 style="font-weight:400">K0 â†’ K1 â†’ K2 kamera testi Â· 48 kare Â· Path Tracer 96 spp Â· aynÄ± Casanova maskesi, aynÄ± Ä±ÅŸÄ±k</h2>
+<p style="color:#9a9184">Kare 0 = K0 (v6 hero) Â· 24 = K1 (45 cm sola) Â· 47 = K2 (35 cm dolly-in + ~5Â° yaw). Oynat / kaydÄ±r.</p>
+<div class="row">
+<div><label>v6 tam geometri</label><img id="a"></div>
+<div><label>hibrit v1 â€” tek plaka (K1'de proxy yan yÃ¼zÃ¼ hatasÄ±)</label><img id="b"></div>
+<div><label>hibrit v2 â€” 3 plaka, kamera-mesafe karÄ±ÅŸÄ±mÄ±</label><img id="c"></div>
+</div>
+<p><button id="play">Oynat</button><span id="t"></span></p>
+<input id="s" type="range" min="0" max="47" value="0">
+<script>
+const s=document.getElementById('s'),t=document.getElementById('t'),imgs={a:'v6',b:'hybrid1',c:'hybrid2'};let timer=null;
+function u(){const f=String(s.value).padStart(4,'0');for(const k in imgs)document.getElementById(k).src=imgs[k]+'/f'+f+'.jpg';
+t.textContent=' frame '+String(s.value).padStart(2,'0')+' Â· '+(s.value==0?'K0':s.value<24?'K0â†’K1':s.value==24?'K1':s.value<47?'K1â†’K2':'K2');}
+s.oninput=u;u();
+document.getElementById('play').onclick=function(){if(timer){clearInterval(timer);timer=null;this.textContent='Oynat';return;}
+this.textContent='Durdur';timer=setInterval(()=>{s.value=(+s.value+1)%48;u();},1000/12);};
+for(const k in imgs)for(let f=0;f<48;f++){const i=new Image();i.src=imgs[k]+'/f'+String(f).padStart(4,'0')+'.jpg';}
+</script></main></body></html>

@@ -2,7 +2,10 @@
 
 A separate Unreal Engine 5.8 project for the Venemask cinematic store experience. Order of work: (1) one correct product + hero render → (2) camera route → (3) Shopify.
 
-## Gate A-HYBRID (round 3): projection pipeline PASS at K0/K2, FAIL at K1; AI panorama / World Labs BLOCKED
+## Gate A-HYBRID round 2: K1 fixed with 3-plate projection; AI plate BLOCKED (no image tool/access); quality jump FAIL
+- Four-way K0/K1/K2: [compare_fourway_K012.png](Renders/gateA_hybrid/compare_fourway_K012.png) · complete camera-test web preview: [Renders/gateA_hybrid/web/index.html](Renders/gateA_hybrid/web/index.html)
+
+## Gate A-HYBRID (round 1): projection pipeline PASS at K0/K2, FAIL at K1; AI panorama / World Labs BLOCKED
 - Report: [reports/gate-A-hybrid.md](reports/gate-A-hybrid.md) · page: [reports/gate-A-hybrid.html](reports/gate-A-hybrid.html)
 - K0/K1/K2 board: [Renders/gateA_hybrid/compare_K012_v6_vs_hybrid.png](Renders/gateA_hybrid/compare_K012_v6_vs_hybrid.png) · layer map: [scene_layer_map.png](Renders/gateA_hybrid/scene_layer_map.png)
 - Price corrected: 124.99 USD (US market) / 3799.00 TRY (Türkiye market), see the manifest.

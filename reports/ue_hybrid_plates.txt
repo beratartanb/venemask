@@ -1,0 +1,2 @@
+sequence /Game/Venemask/Cinematics/LS_Plate_K1 frames 1
+sequence /Game/Venemask/Cinematics/LS_Plate_K2 frames 1

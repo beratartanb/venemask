@@ -196,7 +196,14 @@ def stage_levels():
     add_cameras("_Hybrid")
 
 
-def build_projection_material(plate_tex):
+def build_projection_material(plates):
+    """Multi-plate camera projection, blended by the distance of the rendering camera to each plate camera.
+
+    plates: list of (texture, cam_loc, cam_aim). Each plate is projected from its own camera; weights
+    w_i = 1 / (dist(camera, plate_cam_i)^2 + 1) restricted to the plate's valid area, normalised.
+    At K0/K1/K2 exactly one plate dominates (no ghosting); in between they cross-fade over ~45 cm.
+    Proxy side faces that one plate sees at grazing angle are covered by the plate that faces them (K1 fix).
+    """
     name = "M_Projection"
     path = G + "/Materials/" + name
     if eas.does_asset_exist(path):
@@ -221,85 +228,125 @@ def build_projection_material(plate_tex):
     def un(cls, a, ao=""):
         x = e(cls); link(a, ao, x, ""); return x
 
-    rot = look_at(K0_LOC, K0_AIM)
-    F = unreal.MathLibrary.get_forward_vector(rot)
-    R = unreal.MathLibrary.get_right_vector(rot)
-    U = unreal.MathLibrary.get_up_vector(rot)
-    cam = e(unreal.MaterialExpressionVectorParameter, parameter_name="CamPos", default_value=unreal.LinearColor(*K0_LOC, 1))
-    fwd = e(unreal.MaterialExpressionVectorParameter, parameter_name="CamFwd", default_value=unreal.LinearColor(F.x, F.y, F.z, 1))
-    rgt = e(unreal.MaterialExpressionVectorParameter, parameter_name="CamRight", default_value=unreal.LinearColor(R.x, R.y, R.z, 1))
-    up = e(unreal.MaterialExpressionVectorParameter, parameter_name="CamUp", default_value=unreal.LinearColor(U.x, U.y, U.z, 1))
+    def const(v): return e(unreal.MaterialExpressionConstant, r=v)
+
+    wp = e(unreal.MaterialExpressionWorldPosition)
+    camws = e(unreal.MaterialExpressionCameraPositionWS)
+    half = const(0.5)
+    big = const(400.0)
+    one = const(1.0)
+    comp = e(unreal.MaterialExpressionScalarParameter, parameter_name="ExposureComp", default_value=2.0 ** 2.5)
     fx = e(unreal.MaterialExpressionScalarParameter, parameter_name="FX", default_value=24.0 / SENSOR[0])
     fy = e(unreal.MaterialExpressionScalarParameter, parameter_name="FY", default_value=24.0 / SENSOR[1])
-    wp = e(unreal.MaterialExpressionWorldPosition)
-    d = op(unreal.MaterialExpressionSubtract, wp, cam, "", "RGB")
-    dx = op(unreal.MaterialExpressionDotProduct, d, fwd, "", "RGB")
-    dy = op(unreal.MaterialExpressionDotProduct, d, rgt, "", "RGB")
-    dz = op(unreal.MaterialExpressionDotProduct, d, up, "", "RGB")
-    half = e(unreal.MaterialExpressionConstant, r=0.5)
-    u = op(unreal.MaterialExpressionAdd, half, op(unreal.MaterialExpressionMultiply, op(unreal.MaterialExpressionDivide, dy, dx), fx))
-    v = op(unreal.MaterialExpressionSubtract, half, op(unreal.MaterialExpressionMultiply, op(unreal.MaterialExpressionDivide, dz, dx), fy))
-    uv = op(unreal.MaterialExpressionAppendVector, u, v)
-    plate = e(unreal.MaterialExpressionTextureSampleParameter2D, parameter_name="Plate", texture=plate_tex,
-              sampler_type=unreal.MaterialSamplerType.SAMPLERTYPE_LINEAR_COLOR)
-    link(uv, "", plate, "UVs")
-    # inside-plate mask: in front of the camera and 0..1 in both axes
-    big = e(unreal.MaterialExpressionConstant, r=400.0)
+
     def inside(t):
         return un(unreal.MaterialExpressionSaturate, op(unreal.MaterialExpressionMultiply,
                   op(unreal.MaterialExpressionSubtract, half, un(unreal.MaterialExpressionAbs, op(unreal.MaterialExpressionSubtract, t, half))), big))
-    msk = op(unreal.MaterialExpressionMultiply, op(unreal.MaterialExpressionMultiply, inside(u), inside(v)),
-             un(unreal.MaterialExpressionSaturate, op(unreal.MaterialExpressionMultiply, dx, big)))
-    # fallback outside the plate: the v6 sky gradient
+
+    colours, weights = [], []
+    for i, (tex, loc, aim) in enumerate(plates):
+        rot = look_at(loc, aim)
+        F = unreal.MathLibrary.get_forward_vector(rot)
+        R = unreal.MathLibrary.get_right_vector(rot)
+        U = unreal.MathLibrary.get_up_vector(rot)
+        cam = e(unreal.MaterialExpressionVectorParameter, parameter_name="CamPos%d" % i, default_value=unreal.LinearColor(*loc, 1))
+        fwd = e(unreal.MaterialExpressionVectorParameter, parameter_name="CamFwd%d" % i, default_value=unreal.LinearColor(F.x, F.y, F.z, 1))
+        rgt = e(unreal.MaterialExpressionVectorParameter, parameter_name="CamRight%d" % i, default_value=unreal.LinearColor(R.x, R.y, R.z, 1))
+        up = e(unreal.MaterialExpressionVectorParameter, parameter_name="CamUp%d" % i, default_value=unreal.LinearColor(U.x, U.y, U.z, 1))
+        d = op(unreal.MaterialExpressionSubtract, wp, cam, "", "RGB")
+        dx = op(unreal.MaterialExpressionDotProduct, d, fwd, "", "RGB")
+        dy = op(unreal.MaterialExpressionDotProduct, d, rgt, "", "RGB")
+        dz = op(unreal.MaterialExpressionDotProduct, d, up, "", "RGB")
+        u = op(unreal.MaterialExpressionAdd, half, op(unreal.MaterialExpressionMultiply, op(unreal.MaterialExpressionDivide, dy, dx), fx))
+        v = op(unreal.MaterialExpressionSubtract, half, op(unreal.MaterialExpressionMultiply, op(unreal.MaterialExpressionDivide, dz, dx), fy))
+        uv = op(unreal.MaterialExpressionAppendVector, u, v)
+        plate = e(unreal.MaterialExpressionTextureSampleParameter2D, parameter_name="Plate%d" % i, texture=tex,
+                  sampler_type=unreal.MaterialSamplerType.SAMPLERTYPE_LINEAR_COLOR)
+        link(uv, "", plate, "UVs")
+        valid = op(unreal.MaterialExpressionMultiply, op(unreal.MaterialExpressionMultiply, inside(u), inside(v)),
+                   un(unreal.MaterialExpressionSaturate, op(unreal.MaterialExpressionMultiply, dx, big)))
+        # distance from the rendering camera to this plate's camera, in metres -> 1/(d^2+1)
+        dist = op(unreal.MaterialExpressionDistance, camws, cam, "", "RGB")
+        dm = op(unreal.MaterialExpressionDivide, dist, const(100.0))
+        w = op(unreal.MaterialExpressionDivide, one, op(unreal.MaterialExpressionAdd, op(unreal.MaterialExpressionMultiply, dm, dm), one))
+        w = op(unreal.MaterialExpressionMultiply, w, valid)
+        colours.append(op(unreal.MaterialExpressionMultiply, op(unreal.MaterialExpressionMultiply, plate, comp, "RGB", ""), w))
+        weights.append(w)
+    wsum = weights[0]
+    csum = colours[0]
+    for w, c in zip(weights[1:], colours[1:]):
+        wsum = op(unreal.MaterialExpressionAdd, wsum, w)
+        csum = op(unreal.MaterialExpressionAdd, csum, c)
+    blended = op(unreal.MaterialExpressionDivide, csum, op(unreal.MaterialExpressionAdd, wsum, const(1e-4)))
+    covered = un(unreal.MaterialExpressionSaturate, op(unreal.MaterialExpressionMultiply, wsum, big))
+    # fallback where no plate covers: the v6 sky gradient
     vn = e(unreal.MaterialExpressionVertexNormalWS)
     nz = e(unreal.MaterialExpressionComponentMask, r=False, g=False, b=True, a=False)
     link(vn, "", nz, "")
-    t = un(unreal.MaterialExpressionSaturate, op(unreal.MaterialExpressionMultiply, nz, e(unreal.MaterialExpressionConstant, r=2.2)))
+    t = un(unreal.MaterialExpressionSaturate, op(unreal.MaterialExpressionMultiply, nz, const(2.2)))
     sky = e(unreal.MaterialExpressionLinearInterpolate)
     link(e(unreal.MaterialExpressionConstant3Vector, constant=unreal.LinearColor(0.17, 0.21, 0.33, 1)), "", sky, "A")
     link(e(unreal.MaterialExpressionConstant3Vector, constant=unreal.LinearColor(0.014, 0.020, 0.042, 1)), "", sky, "B")
     link(t, "", sky, "Alpha")
-    # MRQ's EXR is scene-linear but already carries the manual exposure (EV -2.5); the emissive path is
-    # exposed again at render time, so compensate by 2^2.5
-    comp = e(unreal.MaterialExpressionScalarParameter, parameter_name="ExposureComp", default_value=2.0 ** 2.5)
-    plate_lin = op(unreal.MaterialExpressionMultiply, plate, comp, "RGB", "")
     out = e(unreal.MaterialExpressionLinearInterpolate)
     link(sky, "", out, "A")
-    link(plate_lin, "", out, "B")
-    link(msk, "", out, "Alpha")
+    link(blended, "", out, "B")
+    link(covered, "", out, "Alpha")
     mel.connect_material_property(out, "", unreal.MaterialProperty.MP_EMISSIVE_COLOR)
     mel.layout_material_expressions(m)
     mel.recompile_material(m)
     eas.save_loaded_asset(m)
-    log("projection material built; plate camera basis F", F, "R", R, "U", U)
+    log("projection material built with", len(plates), "plates")
     return m
 
 
-def stage_plate():
-    # the plate must be the linear EXR (scene radiance): the PNG is already exposed/tonemapped and
-    # would be exposed again (EV -2.5) through the emissive path -> near black
-    exr = os.path.join(ROOT, "Renders", "plate", "L_Hero_Plate_LS_Plate_.0000.exr")
-    png = os.path.join(ROOT, "Renders", "plate", "L_Hero_Plate_LS_Plate_PathTracer.0000.png")
-    src = exr if os.path.exists(exr) else png
+PLATE_CAMS = {"K0": (K0_LOC, K0_AIM), "K1": (K1_LOC, K1_AIM), "K2": (K2_LOC, K2_AIM)}
+
+
+def stage_plates():
+    """Add K1/K2 plate cameras (24 mm, f/22) to L_Hero_Plate so each pose gets its own plate."""
+    les.load_level(G + "/Maps/L_Hero_Plate")
+    for a in actors.get_all_level_actors():
+        if label_of(a) in ("CAM_Plate_K1", "CAM_Plate_K2"):
+            actors.destroy_actor(a)
+    for k in ("K1", "K2"):
+        loc, aim = PLATE_CAMS[k]
+        cam = make_camera("CAM_Plate_" + k, loc, aim, 24.0, 22.0)
+        make_sequence("LS_Plate_" + k, cam)
+    les.save_current_level()
+
+
+def import_plate(exr, name):
     t = unreal.AssetImportTask()
-    t.filename = src
+    t.filename = exr
     t.destination_path = G + "/Textures"
-    t.destination_name = "T_Plate_K0"
+    t.destination_name = name
     t.automated = True
     t.replace_existing = True
     t.save = True
     at.import_asset_tasks([t])
-    tex = unreal.load_asset(G + "/Textures/T_Plate_K0")
-    if src.endswith(".exr"):
-        tex.set_editor_property("compression_settings", unreal.TextureCompressionSettings.TC_HDR)
-        tex.set_editor_property("srgb", False)
+    tex = unreal.load_asset(G + "/Textures/" + name)
+    tex.set_editor_property("compression_settings", unreal.TextureCompressionSettings.TC_HDR)
+    tex.set_editor_property("srgb", False)
     tex.set_editor_property("mip_gen_settings", unreal.TextureMipGenSettings.TMGS_NO_MIPMAPS)
     tex.set_editor_property("address_x", unreal.TextureAddress.TA_CLAMP)
     tex.set_editor_property("address_y", unreal.TextureAddress.TA_CLAMP)
     eas.save_loaded_asset(tex)
-    log("plate texture", src, "size", tex.blueprint_get_size_x(), tex.blueprint_get_size_y())
-    mat = build_projection_material(tex)
+    log("plate texture", name, exr, tex.blueprint_get_size_x(), tex.blueprint_get_size_y())
+    return tex
 
+
+def stage_plate():
+    """Import the linear EXR plates (the PNGs are already exposed/tonemapped) and build the projection.
+    VM_PLATES = K0 (single plate, v1 behaviour) or K0,K1,K2 (multi-plate)."""
+    keys = os.environ.get("VM_PLATES", "K0,K1,K2").split(",")
+    files = {"K0": "L_Hero_Plate_LS_Plate_.0000.exr", "K1": "L_Hero_Plate_LS_Plate_K1_.0000.exr", "K2": "L_Hero_Plate_LS_Plate_K2_.0000.exr"}
+    plates = []
+    for k in keys:
+        exr = os.path.join(ROOT, "Renders", "plate", files[k])
+        assert os.path.exists(exr), "missing plate " + exr
+        plates.append((import_plate(exr, "T_Plate_" + k), PLATE_CAMS[k][0], PLATE_CAMS[k][1]))
+    mat = build_projection_material(plates)
     les.load_level(G + "/Maps/L_Hero_Hybrid")
     n = 0
     for a in actors.get_all_level_actors():
@@ -308,7 +355,7 @@ def stage_plate():
             for i in range(c.get_num_materials()):
                 c.set_material(i, mat)
             n += 1
-    log("hybrid: projection material on", n, "proxy actors")
+    log("hybrid: projection material on", n, "proxy actors; plates", keys)
     les.save_current_level()
 
 
@@ -352,6 +399,8 @@ def stage_layermap():
 
 if STAGE == "levels":
     stage_levels()
+elif STAGE == "plates":
+    stage_plates()
 elif STAGE == "layermap":
     stage_layermap()
 else:

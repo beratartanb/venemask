@@ -1,5 +1,19 @@
 # GATE A-HYBRID — hibrit çevre denemesi (v6 üzerine)
 
+## Tur 2 güncellemesi (29 Ekim 2026, akşam)
+
+**1 · AI çevre görüntüsü — BLOCKED.** Bu oturumda görüntü üretim aracı yok: makinede yerel Stable Diffusion/ComfyUI/InvokeAI kurulumu bulunamadı, ortamda API anahtarı yok (OpenAI/Stability/Replicate/fal/Runway/Kling/Blockade), Claude Code oturumunda görüntü üreten bir araç/bağlayıcı etkin değil. Eski sahne yeniden render edilip "AI çevre" olarak **sunulmadı**. Gereken erişim: eklenti kataloğundaki görüntü üreticilerinden biri (Runway API Skills, Kling AI, MuAPI veya CellCog) hesap/API anahtarıyla etkinleştirilmeli; ya da `Renders/plate/L_Hero_Plate_LS_Plate_PathTracer.0000.png` (24 mm K0 plakası) referans alınarak dışarıda üretilmiş, maskesiz/yazısız bir matte (tercihen aynı kadraj, 4096×2304, linear EXR veya sRGB PNG) `Renders/plate/` altına konmalı. sRGB geldiğinde script linear'a çevirir ve `ExposureComp` ile pozlama eşitlenir; perspektif eşleşmesi için K1/K2 plakaları da aynı yöntemle (img2img, aynı kamera) üretilmelidir.
+
+**2 · K1 proxy yan yüzü — DÜZELTİLDİ (blur ile değil).** Tek plaka yerine **üç plaka** (K0, K1, K2 kameralarından 24 mm, 4096×2304, PT 512 spp) ve render kamerasının her plaka kamerasına uzaklığına göre ağırlıklandırılan karışım (`w = 1/(d²+1)`, geçerli alan maskesiyle, normalize). K0/K1/K2'de tek plaka baskın (hayalet yok), aralarda ~45 cm boyunca çapraz geçiş. Sonuç: `stills/L_Hero_Hybrid_LS_K1_Hybrid_PathTracer.0000.png` sağ kenarda gerçek cephe/ufuk gösterir; eski tek plaka hali `stills_singleplate/` altında saklandı.
+
+**3 · Dörtlü karşılaştırma:** `Renders/gateA_hybrid/compare_fourway_K012.png` — referans (tek konsept karesi) · v6 · hibrit v1 (tek plaka) · hibrit v2 (üç plaka). **AI destekli hibrit sütunu yok (BLOCKED)**; v2 sütunu AI plakası içermez.
+
+**4 · Kamera testi web önizlemesi (depoda, eksiksiz):** `Renders/gateA_hybrid/web/index.html` — 3 × 48 kare (960×540 JPEG, ~8 MB), oynat/kaydır. MP4 üretilemedi: makinede ffmpeg yok; `winget install Gyan.FFmpeg` sonrası tek komutla üretilebilir.
+
+**Karar (tur 2):** K1 **PASS** (proxy hatası giderildi), projeksiyon K0/K2 **PASS**; görsel kalite sıçraması **YOK → FAIL** (plakalar hâlâ v6 geometrisinden; AI plakası BLOCKED). Gate A **FAIL** devam ediyor; maske/ürün değiştirilmedi; Shopify/koleksiyon işi yok.
+
+---
+
 - **Tarih:** 2026-10-29 · **Temel:** Gate A v6 (`c5ed36f`), `reports/gate-A.md` · v6 dosyaları **korundu** (`Renders/gateA/hero_v6_*` üzerine yazılmadı)
 - **Proje:** `Venemask_Cinematic_Showroom.uproject` (UE 5.8.1). v6 sahnesi `L_Hero` değiştirilmedi; yalnızca K0/K1/K2 kamera aktörleri ve sekansları eklendi.
 - **Yeni level'lar:** `L_Hero_Plate` (plaka kamerası), `L_Hero_Hybrid` (hibrit A), `L_Hero_LayerMap` (katman haritası)
