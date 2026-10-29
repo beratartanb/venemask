@@ -1,0 +1,75 @@
+# GATE A-HYBRID — hibrit çevre denemesi (v6 üzerine)
+
+- **Tarih:** 2026-10-29 · **Temel:** Gate A v6 (`c5ed36f`), `reports/gate-A.md` · v6 dosyaları **korundu** (`Renders/gateA/hero_v6_*` üzerine yazılmadı)
+- **Proje:** `Venemask_Cinematic_Showroom.uproject` (UE 5.8.1). v6 sahnesi `L_Hero` değiştirilmedi; yalnızca K0/K1/K2 kamera aktörleri ve sekansları eklendi.
+- **Yeni level'lar:** `L_Hero_Plate` (plaka kamerası), `L_Hero_Hybrid` (hibrit A), `L_Hero_LayerMap` (katman haritası)
+- **Script:** `Scripts/ue_hybrid.py` (üç aşama: `levels`, `plate`, `layermap`), `Scripts/compare_hybrid.ps1`
+- **Çıktılar:** `Renders/gateA_hybrid/` — `stills/` (K0/K1/K2, v6 ve hibrit), `move/` (48 kare × 2), `aov/`, `compare_*.png`, `move_contact_*.png`, `camera_test.html`, `scene_layer_map.png`
+- **Ürün:** Casanova Bauta Mask — Eyes Wide Shut Inspired · id 7591523549267 · variant 42664065106003 · SKU 17629779130_3E08 · **124.99 USD** (US/DE/GB pazarı) · 3799.00 **TRY** (Türkiye pazarı, kur 50.58; mağaza temel para birimi USD) · kontrol 2026-10-29 15:25 UTC, `/products/...js` + `localization` çerezi. Manifest: `reports/mask_asset_manifest.csv` (eski "painted gold band" kaydı kaldırıldı).
+
+## Deney A — gerçek 3D yakın + kamera projeksiyonlu orta/uzak
+
+**Yöntem (Composure yerine projektif materyal):** Composure 5.8'de Experimental; kurulum/plugin bağımlılığı yerine aynı işi yapan bir **kamera-projeksiyon materyali** yazıldı (`M_Projection`): K0 noktasındaki 24 mm plaka kamerasının taban vektörleri (F/R/U) ve odak oranlarıyla dünya konumundan plaka UV'si hesaplanır; plaka dışı bölgede v6 gökyüzü degradesi kullanılır. Plaka linear EXR olarak okunur ve MRQ'nun EV −2.5 pozlaması `ExposureComp` ile telafi edilir.
+
+| Katman | İçerik | Teknik |
+|---|---|---|
+| **Gerçek 3D (yakın)** | Casanova maske + örgü geometrisi, 7 ashlar kapak taşı, korkuluk gövdeleri, 6 sıra paye, yakın sütun + loggia kemer/entablatür, teras döşemesi, rıhtım duvarı, **kanal suyu (gerçek yansıma)**, 2 yakın bağlama kazığı, key/rim/fill/ledge/fener ışıkları, ay yönlü ışığı | `L_Hero` ile aynı aktörler |
+| **Projeksiyon (orta)** | Karşı kıyı palazzo hacimleri (kutu proxy'ler), yan kanal evleri, kubbe tabanı, çan kulesi | 18 proxy aktör, `M_Projection` (unlit emissive) |
+| **Projeksiyon (uzak)** | Gökyüzü, ay, uzak cephe ışıkları, tüm pencere/fener parlaklıkları | Gök küresi, aynı plaka |
+| **Silinen (plakaya pişirildi)** | 804 aktör: pencere kasaları, kornişler, kemerler, fener/lamba ışıkları, köprü, kubbe projektörleri, ay küresi | — |
+
+**Plaka:** `Renders/plate/L_Hero_Plate_LS_Plate_.0000.exr` (LOCAL ONLY, 21 MB) + PNG önizleme; 4096×2304, Path Tracer 512 spp, 24 mm f/22 (h-FOV 73.7°), yakın katman gizli.
+
+**Plakanın kaynağı:** bu turda plaka **v6 geometrisinin kendisinden** pişirildi. Yapay zekâ panorama (Blockade Labs) ve World Labs çıktısı **alınamadı** (aşağıya bak). Dolayısıyla Deney A bu turda **boru hattını ve parallax davranışını** kanıtlar; K0'da v6 ile görsel kalite farkı beklenmez. Daha iyi bir plaka (aynı 24 mm K0 kamerasından, aynı perspektifle boyanmış matte / img2img) `T_Plate_K0` dokusunu değiştirerek sahneye girer; `Renders/plate/*.png` ve `aov/` derinlik bu iş için hazır.
+
+## Kamera testi K0 / K1 / K2
+
+| Poz | Konum (cm) | Hedef (cm) | Lens | Not |
+|---|---|---|---|---|
+| K0 | (−150, −75, 130) | (11.6, −23.3, 120) | 42 mm f/6.3 | v6 hero kadrajı |
+| K1 | (−129.9, −115.2, 130) | aynı | 42 mm f/6.3 | kameranın sağ vektörü boyunca **45 cm sola** kayma |
+| K2 | (−116.7, −64.3, 127.9) | (6.3, −12.5, 118) | 42 mm f/6.3 | görüş ekseninde **35 cm dolly-in** + hedef 12 cm maskeye (~5° yaw) |
+| Move | K0 → K1 (0–24) → K2 (24–47) | odak maskeyi izler | 48 kare, PT 96 spp, 1280×720 | `camera_test.html` ile kare kare |
+
+**Parallax zarfı (45 cm kayma):** karşı kıyı 110 m → 0.23° ≈ 10 px (1920'de); orta proxy'ler 16–45 m → 0.6–1.6° ≈ 25–70 px. Bu yüzden orta katman geometri (proxy) olmak zorunda; yalnızca uzak katman küreye konabilir.
+
+**Gözlemler (stills):**
+- **K0:** hibrit ≈ v6. Paye ve sütun, projeksiyonlu cepheleri doğru örter (occlusion doğru); su proxy'lerin emissive ışığını yansıtır.
+- **K1:** maske, örgü, çatlak, temas gölgesi ve yakın taş **değişmedi** (gerçek 3D). Hata: sağ kadraj kenarında bir palazzo proxy kutusunun yan yüzü görünür hale gelir ve plakanın gökyüzü bölgesini gerilmiş olarak taşır (`stills/L_Hero_Hybrid_LS_K1_Hybrid_PathTracer.0000.png`, sağ üst). v6'da aynı yerde gerçek cephe/ufuk var. → proxy'lerin yan yüzleri için ikinci (yan) plaka ya da proxy kutularının kameraya dönük tek yüze indirgenmesi gerekir.
+- **K2:** hibrit ≈ v6; dolly-in'de perspektif kayması proxy'ler sayesinde tutarlı, dikiş yok.
+
+## Deney B — World Labs Marble (mekânsal dünya üretimi)
+
+**Durum: BLOCKED (erişim/lisans).** Doğrulanan gerçekler (29 Ekim 2026):
+- Girdi: metin, görsel, video, 360 panorama; "3D layout" (Chisel). Çıktı: Gaussian splat **SPZ / PLY**, **360 panorama**, **collider mesh** (Standard plan); **yüksek kaliteli dokulu mesh (GLB)** ve **ticari haklar Pro plan** (docs.worldlabs.ai/marble/export). **Free plan export yapamaz.**
+- Hizmet şartları (worldlabs.ai/terms-of-service §3.3): ücretsiz hesaplarda çıktının hakları World Labs'ta kalır, yalnızca kişisel/ticari olmayan kullanım; ücretli hesaplar çıktıyı ticari kullanabilir, istenirse atıf zorunlu.
+- Unreal yolu: Gaussian splat plugin'leri (Akiya: .ply; VIVE Mars: .ply/.spz; Volinga) — World Labs'ın kendi karşılaştırma yazısı Path Tracer/Lumen uyumuna değinmiyor; splat'lar v6'nın Path Tracer ışık/yansıma modeline doğrudan katılmaz (gölge/yansıma yok veya yaklaşık).
+- Kullanıcı adına hesap açılmadı, ödeme yapılmadı. Denemek için: Pro plan hesabı + aynı K0 bakış açısından üretilmiş dünya + UE splat plugin'i; o zaman K0/K1/K2 testi `L_Hero_Hybrid`'in uzak katmanında tekrarlanır.
+
+**Blockade Labs Skybox AI:** API anahtarı/hesap yok → panorama üretilemedi (BLOCKED). Not: 360 skybox yalnızca açısal kapsama verir; K1 benzeri yan hareketler için orta katman yine proxy/projection olmalı.
+
+## Araçlar ve kaynaklar
+| Araç | Sürüm / kaynak | Lisans / durum |
+|---|---|---|
+| Unreal Engine | 5.8.1, Path Tracer, MRQ, Cine Camera, Python | Epic EULA; proje yerel |
+| Composure / Media Plate | 5.8 plugin'leri mevcut, **kullanılmadı** (projektif materyal yeterli, bağımlılık yok) | — |
+| Plaka | v6 geometrisinden kendi render'ımız | kendi üretimimiz |
+| Mimari parçalar, dokular | `Scripts/gen_*.py` prosedürel | kendi üretimimiz |
+| Casanova STL, fotoğraflar | kullanıcının baskı dosyası ve mağaza fotoğrafları | kullanıcı |
+| Blockade Labs / World Labs / Meshy | **kullanılmadı** | erişim yok |
+| ffmpeg | makinede yok → video yerine 48 kare PNG + `camera_test.html` kaydırıcı + kontak sayfası | — |
+
+## Ürün doğruluğu (değişmedi, ayrı kapı)
+- Geometri: STL birebir, boya bölgeleri, 3+3 bukle, göz/burun — PASS.
+- Örgü: **GEOMETRİ PASS**, iplik PBR'si **UNVERIFIED**. Craquelure: fotoğraf ölçeğinde prosedürel, **UNVERIFIED**.
+- Hibrit deneyinde maskeye hiçbir şey eklenmedi; aynı aktör, aynı malzeme.
+
+## LOCAL ONLY (depoda yok) ve yeniden üretim
+`Content/` (tüm .uasset/.umap), `SourceAssets/**/*.stl|*.obj`, `SourceAssets/textures|stone|arch`, tüm `*.exr`, `Renders/plate`, `Renders/gateA_hybrid/move` kareleri (boyut). Yeniden üretim: `prep_mask.py` → `gen_braid.py` → `gen_stone.py` → `gen_arch.py` → `gen_textures.py` → `ue_build_hero.py` → `ue_make_configs.py` → `ue_hybrid.py` (levels) → `render.ps1 -Config MRQ_Plate -Map L_Hero_Plate -Sequence LS_Plate` → `VM_STAGE=plate ue_hybrid.py` → `render.ps1 -Config MRQ_PT_K/MRQ_PT_Move ...` → `compare_hybrid.ps1`. Depo tek başına eksiksiz proje değildir.
+
+## Karar
+- **Deney A (boru hattı): PASS** — projeksiyon K0'da v6 ile eşdeğer, K2'de tutarlı, occlusion ve su yansıması doğru.
+- **Deney A (K1 yan hareket): FAIL** — proxy yan yüzü artefaktı; düzeltme belli (yan plaka / tek yüz proxy).
+- **Deney A (görsel kalite sıçraması): henüz yok** — plaka v6'dan pişirildiği için aynı kalite; sıçrama için harici matte/panorama gerekir (BLOCKED).
+- **Deney B: BLOCKED** (ücretli hesap + lisans gerekli).
+- **Gate A: FAIL (devam)** — referans sınıfı sinematik kaliteye bu turda ulaşılmadı. Kamera rotası, diğer maskeler ve Shopify'a geçilmedi. Nihai görsel kabul kullanıcı onayına bağlı.

@@ -12,10 +12,13 @@ DEST = "/Game/Venemask/Cinematics/Render"
 at = unreal.AssetToolsHelpers.get_asset_tools()
 eas = unreal.get_editor_subsystem(unreal.EditorAssetSubsystem)
 
-DEFAULT = "MRQ_Lumen:lumen:8:1600x900:lumen_preview;MRQ_PT:pt:256:1920x1080:pt_beauty;MRQ_AOV:aov:8:1920x1080:aov"
+DEFAULT = ("MRQ_Lumen:lumen:8:1600x900:lumen_preview;MRQ_PT:pt:256:1920x1080:pt_beauty;MRQ_AOV:aov:8:1920x1080:aov;"
+           # hybrid test set: plate (wide, high spp), K-pose stills (named by level + sequence), camera-move sequences
+           "MRQ_Plate:pt:512:4096x2304:plate:1;MRQ_PT_K:pt:256:1920x1080:gateA_hybrid/stills:1;"
+           "MRQ_AOV_K:aov:8:1920x1080:gateA_hybrid/aov:1;MRQ_PT_Move:pt:96:1280x720:gateA_hybrid/move:48")
 
 
-def make(name, mode, spp, res, tag):
+def make(name, mode, spp, res, tag, frames="1"):
     w, h = (int(v) for v in res.split("x"))
     path = DEST + "/" + name
     if eas.does_asset_exist(path):
@@ -24,12 +27,12 @@ def make(name, mode, spp, res, tag):
 
     o = cfg.find_or_add_setting_by_class(unreal.MoviePipelineOutputSetting)
     o.output_resolution = unreal.IntPoint(w, h)
-    o.output_directory = unreal.DirectoryPath(os.path.join(ROOT, "Renders", tag))
-    o.file_name_format = "{sequence_name}_{render_pass}.{frame_number}"
+    o.output_directory = unreal.DirectoryPath(os.path.join(ROOT, "Renders", tag.replace("/", os.sep)))
+    o.file_name_format = "{level_name}_{sequence_name}_{render_pass}.{frame_number}"
     o.override_existing_output = True
     o.use_custom_playback_range = True
     o.custom_start_frame = 0
-    o.custom_end_frame = 1
+    o.custom_end_frame = int(frames)
 
     aa = cfg.find_or_add_setting_by_class(unreal.MoviePipelineAntiAliasingSetting)
     aa.override_anti_aliasing = True

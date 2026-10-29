@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Venemask Gate A Hybrid</title>
+<style>
+  :root { --bg:#0e0d0c; --fg:#e9e3d8; --muted:#9a9184; --line:#2a2622; --fail:#d9644a; --ok:#7fb37a; --warn:#d8b25a; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.55 Georgia, "Times New Roman", serif; }
+  main { max-width:1500px; margin:0 auto; padding:24px 16px 64px; }
+  h1 { font-weight:400; letter-spacing:.04em; margin:0 0 4px; }
+  h2 { font-weight:400; margin:40px 0 12px; border-bottom:1px solid var(--line); padding-bottom:6px; }
+  .verdict { display:inline-block; padding:4px 12px; border:1px solid var(--fail); color:var(--fail); font-family:system-ui, sans-serif; font-size:13px; letter-spacing:.08em; margin-right:8px; }
+  .muted { color:var(--muted); }
+  .grid { display:grid; gap:12px; }
+  .g2 { grid-template-columns:repeat(2, minmax(0,1fr)); }
+  figure { margin:0; }
+  img { width:100%; display:block; border:1px solid var(--line); background:#000; }
+  figcaption { font:12px/1.4 system-ui, sans-serif; color:var(--muted); padding:6px 2px; }
+  table { border-collapse:collapse; width:100%; font:13px/1.45 system-ui, sans-serif; }
+  td, th { border-bottom:1px solid var(--line); padding:7px 8px; text-align:left; vertical-align:top; }
+  th { color:var(--muted); font-weight:500; }
+  .ok { color:var(--ok); } .fail { color:var(--fail); } .warn { color:var(--warn); }
+  a { color:#d8b25a; }
+  @media (max-width:900px) { .g2 { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>VENEMASK — Gate A-HYBRID</h1>
+  <p class="muted">29 Ekim 2026 · v6 üzerine · UE 5.8.1 Path Tracer · aynı Casanova STL, aynı ışık, aynı 42 mm f/6.3 kamera</p>
+  <p><span class="verdict">DENEY A boru hattı: PASS · K1: FAIL</span><span class="verdict">DENEY B: BLOCKED</span><span class="verdict">GATE A: FAIL (devam)</span></p>
+
+  <h2>1 · Sahne katman haritası</h2>
+  <figure><img src="../Renders/gateA_hybrid/scene_layer_map.png" alt="Katman haritası"><figcaption>Beyaz = gerçek ürün · yeşil = gerçek 3D yakın set (taş, paye, sütun, su, kazıklar) · turuncu = projeksiyonlu orta proxy'ler · mavi = projeksiyonlu uzak/gökyüzü</figcaption></figure>
+
+  <h2>2 · K0 / K1 / K2 — v6 tam geometri (üst) ↔ hibrit A (alt)</h2>
+  <figure><img src="../Renders/gateA_hybrid/compare_K012_v6_vs_hybrid.png" alt="K0 K1 K2 karşılaştırması"><figcaption>K1'de hibrit sağ üst köşede proxy yan yüzü artefaktı verir (FAIL); K0 ve K2 tutarlı.</figcaption></figure>
+  <figure><img src="../Renders/gateA_hybrid/compare_reference_K0.png" alt="Referans ve K0"><figcaption>Referans 02 · v6 K0 · hibrit K0</figcaption></figure>
+
+  <h2>3 · Kamera hareketi K0 → K1 → K2 (48 kare)</h2>
+  <p>Kare kare karşılaştırma: <a href="../Renders/gateA_hybrid/camera_test.html">camera_test.html</a> (kaydırıcı; kareler LOCAL ONLY). Kontak sayfaları:</p>
+  <div class="grid g2">
+    <figure><img src="../Renders/gateA_hybrid/move_contact_v6.png" alt="v6 hareket"><figcaption>v6 tam geometri, her 4. kare</figcaption></figure>
+    <figure><img src="../Renders/gateA_hybrid/move_contact_hybridA.png" alt="hibrit hareket"><figcaption>hibrit A, her 4. kare</figcaption></figure>
+  </div>
+
+  <h2>4 · Plaka ve projeksiyon</h2>
+  <div class="grid g2">
+    <figure><img src="../Renders/gateA_hybrid/plate_preview.png" alt="Plaka"><figcaption>K0 noktasından 24 mm plaka (4096×2304, PT 512 spp), yakın katman gizli — bu turda v6 geometrisinden pişirildi</figcaption></figure>
+    <figure><img src="../Renders/gateA_hybrid/aov/L_Hero_Hybrid_LS_K0_Hybrid_FinalImageM_PP_WorldNormal.0000.png" alt="Hibrit normal"><figcaption>Hibrit K0 world normal: yakın katman tam geometri, orta katman düz proxy kutular</figcaption></figure>
+  </div>
+
+  <h2>5 · Kontrol</h2>
+  <table>
+    <tr><th>Madde</th><th>Durum</th><th>Kanıt</th></tr>
+    <tr><td>Ürün geometrisi / boya / örgü geometrisi (her pozda)</td><td class="ok">PASS</td><td>aynı aktör; stills K0/K1/K2</td></tr>
+    <tr><td>Örgü iplik PBR, craquelure deseni</td><td class="warn">UNVERIFIED</td><td>v6 ile aynı</td></tr>
+    <tr><td>Projeksiyon K0 eşdeğerliği</td><td class="ok">PASS</td><td>compare_K012 üst/alt K0</td></tr>
+    <tr><td>Occlusion / su yansıması (proxy emissive)</td><td class="ok">PASS</td><td>hibrit K0, K2</td></tr>
+    <tr><td>K1 yan hareket</td><td class="fail">FAIL</td><td>proxy yan yüzü, sağ üst</td></tr>
+    <tr><td>K2 dolly-in</td><td class="ok">PASS</td><td>dikiş yok</td></tr>
+    <tr><td>Görsel kalite sıçraması</td><td class="fail">YOK</td><td>plaka v6'dan; harici matte BLOCKED</td></tr>
+    <tr><td>World Labs Marble</td><td class="warn">BLOCKED</td><td>export + ticari hak Pro plan; hesap/ödeme yok</td></tr>
+  </table>
+
+  <h2>6 · Ürün fiyatı (düzeltme)</h2>
+  <p>124.99 USD (US/DE/GB pazarı) · 3799.00 TRY (Türkiye pazarı, kur 50.58) · mağaza temel para birimi USD · id 7591523549267 · SKU 17629779130_3E08 · kontrol 2026-10-29 15:25 UTC. Fiyat Unreal görseline yazılmadı; mağaza kaydı değiştirilmedi.</p>
+</main>
+</body>
+</html>

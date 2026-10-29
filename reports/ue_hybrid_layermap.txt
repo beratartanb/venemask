@@ -1,0 +1,2 @@
+sequence /Game/Venemask/Cinematics/LS_K0_LayerMap frames 1
+layer map level built

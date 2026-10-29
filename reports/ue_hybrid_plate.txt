@@ -1,0 +1,3 @@
+plate texture C:/Users/berat/Documents/Venemask_Cinematic_Showroom/Renders\plate\L_Hero_Plate_LS_Plate_.0000.exr size 4096 2304
+projection material built; plate camera basis F <Struct 'Vector' (0x00000259A67CFF80) {x: 0.950734, y: 0.304376, z: -0.058823}> R <Struct 'Vector' (0x00000259A67CFDF0) {x: -0.304904, y: 0.952383, z: -0.000000}> U <Struct 'Vector' (0x00000259A67CF210) {x: 0.056022, y: 0.017935, z: 0.998268}>
+hybrid: projection material on 18 proxy actors

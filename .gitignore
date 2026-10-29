@@ -21,3 +21,7 @@ Renders/**/*.exr
 __pycache__/
 *.pyc
 *.bak
+Renders/plate/
+Renders/gateA_hybrid/move/
+Renders/gateA_hybrid/aov/*.exr
+Renders/gateA_hybrid/stills/*.exr

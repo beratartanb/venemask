@@ -1,0 +1,17 @@
+sequence /Game/Venemask/Cinematics/LS_K0 frames 1
+camera K0  loc (-150.0, -75.0, 130.0) aim (11.627553482998906, -23.25510696599781, 120.0)
+sequence /Game/Venemask/Cinematics/LS_K1 frames 1
+camera K1  loc (-129.87538820250188, -115.24922359499621, 130.0) aim (11.627553482998906, -23.25510696599781, 120.0)
+sequence /Game/Venemask/Cinematics/LS_K2 frames 1
+camera K2  loc (-116.72431468771242, -64.3468239788796, 127.94121208944811) aim (6.26099033699941, -12.52198067399882, 118.0)
+sequence /Game/Venemask/Cinematics/LS_Move frames 48
+sequence /Game/Venemask/Cinematics/LS_Plate frames 1
+plate camera (-150.0, -75.0, 130.0) aim (11.627553482998906, -23.25510696599781, 120.0) focal 24 f/22
+hybrid: removed far detail actors 804
+sequence /Game/Venemask/Cinematics/LS_K0_Hybrid frames 1
+camera K0 _Hybrid loc (-150.0, -75.0, 130.0) aim (11.627553482998906, -23.25510696599781, 120.0)
+sequence /Game/Venemask/Cinematics/LS_K1_Hybrid frames 1
+camera K1 _Hybrid loc (-129.87538820250188, -115.24922359499621, 130.0) aim (11.627553482998906, -23.25510696599781, 120.0)
+sequence /Game/Venemask/Cinematics/LS_K2_Hybrid frames 1
+camera K2 _Hybrid loc (-116.72431468771242, -64.3468239788796, 127.94121208944811) aim (6.26099033699941, -12.52198067399882, 118.0)
+sequence /Game/Venemask/Cinematics/LS_Move_Hybrid frames 48
