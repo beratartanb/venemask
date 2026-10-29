@@ -30,3 +30,7 @@ Not in the repo: Unreal `Content/`, the STL/OBJ meshes and the generated texture
 2. `UnrealEditor-Cmd <uproject> -ExecutePythonScript=Scripts/ue_build_hero.py`
 3. `UnrealEditor-Cmd <uproject> -ExecutePythonScript=Scripts/ue_make_configs.py`
 4. `Scripts/render.ps1 -Config MRQ_PT`
+
+## Art direction v2 — reset (29 Oct 2026): v6/hybrid kept as technical prototypes, new design starts from the references; image generation BLOCKED
+- Brief, chosen real mask (La Regina Nera, 299.99 USD / 7899 TRY; no source model on disk) and the exact inputs needed for real image generation: [docs/art_direction/AD_v2_brief.md](docs/art_direction/AD_v2_brief.md)
+- Equal-scale board, references vs current prototypes (no new design column yet): [Renders/artdir_v2/compare_refs_vs_v6.png](Renders/artdir_v2/compare_refs_vs_v6.png)
