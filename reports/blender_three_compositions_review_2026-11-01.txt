@@ -1,0 +1,104 @@
+VENEMASK / THREE COMPOSITION STUDIES
+Production and visual review report
+Date: 2026-11-01
+
+STATUS
+The requested artistic standard has NOT been achieved or approved.
+This is an unfinished three-still study, not a completed cinematic world.
+The genuine La Regina Nera model remains unavailable; the main Hero product
+composition is unfinished. Casanova is only a secondary provisional product.
+
+SCOPE AND CHANGES MADE
+A separate Blender scene was built from an empty scene for the Hero, Gallery
+Reveal and Hall of Icons, using licensed source geometry and reusable import,
+material and render helpers. The previous five-destination project is preserved.
+
+Hero: revised canal staging and near-surface camera, dimensional architectural
+facades, a carved wellhead supporting the display, and cloth geometry baked from
+a collision simulation. The main product location remains empty.
+
+Gallery: an enclosed vaulted composition with a recessed apse, gathered curtain,
+carved display supports and a closer secondary Casanova composition.
+
+Hall: an oblique staircase composition with a bronze Perseus sculpture, ribbed
+vaults, lancet glazing, recessed architectural fields and carved foreground support.
+
+These are actual geometry, material, camera and lighting changes. They do not
+establish that the visual result is an improvement or meets the supplied references.
+
+ACTUAL CURRENT RENDERS
+All three were rendered in Blender 5.2 / Cycles on CPU at 1280x720, 40 samples.
+- Hero: renders/final_hero.png; recorded render time 141.83 seconds.
+- Gallery Reveal: renders/final_gallery.png; 167.35 seconds.
+- Hall of Icons: renders/final_hall.png; 142.41 seconds.
+
+The actual images were opened and visually inspected. The comparison board,
+renders/reference_comparison.jpg, places the supplied references, rejected
+baseline and new stills on equal 768x432 canvases with complete images letterboxed.
+It is evidence for review, not evidence of artistic approval.
+
+VISUAL FINDINGS
+- Hero cloth still reads thin and flat despite the executed cloth simulation.
+- The skyline reads as separate assemblies; the dark canal band weakens depth.
+- Gallery surfaces remain broad and empty; distant practical fixtures are not
+  convincingly grounded in the visible architecture.
+- The Hall has carved foreground detail but still has plain wall masses and
+  simplified architectural transitions.
+- The requested painterly atmosphere, monumental sculptural unity, rich surface
+  history and sophisticated chiaroscuro remain unmet.
+More samples, resolution or animation frames would not resolve these design issues.
+
+PRODUCT STATUS
+La Regina Nera has not been imported because its genuine model was unavailable.
+Its 0.8 x 0.4 x 0.8 metre placement envelope is an estimate, not measured product
+dimensions. The current camera projects that estimate across approximately 35%
+of the image width; this is not validation of a real product silhouette/contact.
+
+Casanova uses authentic merchant OBJ geometry with reconstructed, provisional
+materials. It appears in the Gallery as a secondary test, not as the feathered Hero.
+Missing products are not represented by invented masks.
+
+SOURCE AND VERIFICATION
+Local study directory: blender_palazzo_compositions/
+Editable source: Venemask_Three_Compositions.blend
+Scene SHA-256:
+495b929e7b4fa8138885b1c7d047ae35c48d0167e574b8dd0edee8b60d95d7a0
+
+Native Blender readback passed. All three render records match this scene hash;
+PNG decoding and dimensions were checked. There are 31 packed file images and
+zero unpacked file images. The board records hashes for all nine input images.
+
+Evidence:
+- metadata/renders_final.json
+- metadata/static_camera_export.json
+- metadata/review_board.json
+- README_REVIEW.txt
+- review.html
+
+The saved scene contains the geometry and packed image dependencies. Rebuilding
+from scripts requires the sibling blender_palazzo_reset/scripts and assets
+directories. Successful technical verification does not establish visual quality.
+
+ASSETS AND LICENSES
+The local ATTRIBUTION.txt and metadata/asset_manifest.json document 11 third-party
+sources plus the merchant Casanova asset, including adaptations:
+- CC0: Met sculpture/reliefs/wellhead; Poly Haven marble, plaster and night sky;
+  ambientCG Marble016.
+- CC BY 4.0: Corinthian column by hippolyte.bouillard; 1D friezes by Paul Kotelevets
+  / 1d_inc; Doge's Palace courtyard facade by Dan; Neobaroque Building by BunburysGhost.
+- Casanova: user-provided merchant asset; no public redistribution license asserted.
+The supplied references also have no public redistribution license asserted here.
+The stone source is marble rock, not verified Istrian limestone.
+
+CAMERA, ANIMATION AND PUBLICATION
+This study has three static cameras and frame range 1..1. No new animation was
+rendered or extended. The previous camera journey has not been applied to or
+validated in this new study. No new frontend, Unreal project or live Shopify
+changes were made.
+
+This GitHub update publishes the text report. The scene, renders, comparison board,
+scripts, credits and review page remain local deliverables; the paths above are
+workspace-relative inventory paths, not claims that those files are hosted here.
+
+The earlier report remains as the record of the separate previous delivery:
+reports/blender_forgotten_palazzo_production_report_2026-11-01.txt
