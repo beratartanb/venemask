@@ -1,0 +1,105 @@
+VENEMASK / THE FORGOTTEN VENETIAN PALAZZO
+Actual delivery report
+
+Status: Detailed artistic work in progress. The reference-quality target has not been achieved or approved.
+The genuine feathered Hero model is missing; complete product staging and final cinematic surface/light review remain unfinished.
+
+Visible artistic limits remain beyond the missing products: broad wall/cloth surfaces, an assembled portal character,
+and gallery lighting/materials that still read more as an architectural set than the richly aged poetic references.
+These require further environment-art work; higher resolution and successful technical checks do not resolve them.
+
+Packaged UTC: 2026-11-01T01:50:52.114461+00:00
+Scene: Venemask_Forgotten_Palazzo.blend
+Scene SHA-256: af12a635c5c081d102a9a15aa7183e5f1a77aa1fc1c42fb1c299d1cb67f9643e
+
+WHAT WAS BUILT
+A genuine empty-scene Blender reset with new spatial design, architecture, materials, lighting and camera compositions.
+The rejected prototype is not the new source. General tooling and the identified merchant OBJ are reused.
+Detailed source assets include Met CC0 sculpture, an authored Corinthian column (CC BY),
+carved friezes (CC BY), new CC0 PBR maps and licensed furniture. See delivery_asset_manifest.json
+for source-level availability, adaptations and usage evidence; availability alone does not prove rendered visibility.
+The new canal backdrop also incorporates Dan's carved Doge's Palace courtyard right wing and
+BunburysGhost's Neo-Baroque building, both CC BY, with documented clipping/enclosure and material adaptations.
+Current derivatives include bent acanthus Hall tracery, carved bronze screens, walnut Atelier fields
+and stone skyline/bridge fasciae. Ugolino's museum-plinth region is cropped from the scene mesh copy.
+The original downloaded meshes remain unchanged. Column presentation materials receive new stone/gold shaders.
+Solitude Night supplies only remapped upper photographic clouds (about 58-90 degrees); its ground,
+manor and native moon are excluded by the shader. The canal architecture and visible moon use actual geometry.
+No Unreal project or live Shopify changes were made.
+
+ACTUALLY RENDERED
+- Hero Terrace / environment pass: 3840x2160, Cycles CPU, 16 threads, priority BelowNormal then Normal, 64 samples; renders/final_hero.png.
+- Gallery Reveal: 1920x1080, Cycles CPU, 16 threads, priority Normal, 64 samples; renders/final_gallery.png.
+- Hall of Icons: 1920x1080, Cycles CPU, 16 threads, priority Normal, 64 samples; renders/final_hall.png.
+- Chamber of Discovery: 1920x1080, Cycles CPU, 16 threads, priority Normal, 48 samples; renders/destinations_discovery.png.
+- Forgotten Atelier: 1920x1080, Cycles CPU, 16 threads, priority Normal, 48 samples; renders/destinations_atelier.png.
+- Mobile Hero: 1080x1920, Cycles CPU, 16 threads, priority Normal, 48 samples; renders/destinations_mobile.png.
+- Hero Terrace / all products hidden: 1920x1080, Cycles CPU, 16 threads, priority Normal, 32 samples; renders/destinations_hero_maskless.png.
+
+VALIDATION
+Every listed image decoded successfully and matches its recorded dimensions, CPU device and current scene SHA-256.
+The saved camera/product/dependency verification reports MATCH; both camera timeline copies retain its matching hash stamp.
+That verification establishes sampled technical consistency, not complete path visibility or artistic approval.
+The comparison board preserves complete supplied references and places them beside the three actual final renders
+on equal 960x540 letterboxed canvases. It is a comparison, not evidence of artistic approval.
+previous_vs_reset.jpg compares three actual rejected prototype renders with the new compositions;
+the old source scenes and old animation are not part of this delivery.
+The original references have not been visually approved as achieved. Object count, file validity and render completion
+do not establish reference quality. Final geometry/lighting and product integration remain subject to visual review.
+
+Visual inspection record: metadata/visual_review.json.
+All delivered final stills were visually inspected; the inspection is tied to their current image hashes.
+The current sparse route contact sheet was visually inspected. This is not continuous playback review.
+Review was performed, but the artistic reference target remains unmet and unapproved.
+Full real-time video playback was not reviewed.
+Review note: Actual Blender stills and sparse route images were inspected; image inspection is separate from approval.
+Review note: The genuine La Regina Nera Hero and six additional product models were unavailable. Casanova remains a secondary provisional product.
+Review note: The primary Hero retains a small secondary Casanova. The additional hero_maskless still was rendered with all product objects hidden and reviewed separately.
+Review note: The new licensed carved facades, sculpture, curved galleries and physically connected rooms improve on the rejected blockout.
+Review note: The target remains unmet: broad cloth/wall surfaces, assembled architectural joins and the lighting/material language require further artistic development.
+Review note: Sparse route review found substantial foreground occlusion through the Gallery transition and a dark covered passage; these transitions still need cinematic refinement.
+Review note: The 48-frame low-resolution camera board supports sparse path/framing review. Real-time playback and the full portrait journey were not visually validated.
+
+PRODUCT LIMITATIONS
+La Regina Nera remains unavailable. Its 0.8 m width x 0.4 m depth x 0.8 m height envelope is an estimate,
+not an actual measurement. The primary Hero is an environment pass with an import-ready main display;
+it retains the small secondary Casanova and must not be described as having all products hidden.
+Casanova is only a secondary provisional product test, imported from authentic merchant OBJ geometry;
+its finish is reconstructed and provisional. It is not the feathered Hero and has no invented adornments.
+Of the approximately eight intended product identities, 1 unique imported identity is recorded;
+7 genuine models remain unavailable against that target. Current manifest has 8 physical slot records.
+No unrelated sculpture or fabricated mask is represented as a Venemask product.
+
+A separate Hero all-products-hidden still is included; its record identifies the hidden product objects.
+All eight physical slot anchors have a recorded supporting surface in metadata/display_support_audit.json.
+This includes B03's new console and C02's fitted, velvet-covered display support.
+The audit is a vertical anchor ray, not validation of missing products' dimensions or final contact shadows.
+
+CAMERA / WEB HANDOFF
+Camera metadata/export files are available:
+- metadata/camera_timeline.json (current scene hash verified)
+- metadata/camera_clearance.json (no top-level source hash recorded)
+- web/camera_timeline.json (current scene hash verified)
+- web/camera_clearance.json (no top-level source hash recorded)
+Continuous transform metadata and an authored rig do not establish a fully rendered or visually validated motion sequence.
+Actual short CPU camera test: 48 PNGs, 512x288, 12 samples; source/hash verified.
+Native authored timing: 72 seconds at 24 fps, frames 1..1729.
+Proxy timing: 8 seconds at 6 fps, approximately 9x accelerated scroll scrub.
+This sparse accelerated test is NOT normal camera timing or a finished continuous web sequence.
+Actual encoded MP4: web/camera_test.mp4.
+Its video-track dimensions, duration and sample count were checked against the verified PNG evidence.
+Container verification does not constitute visual approval of camera movement.
+camera_motion_review.jpg contains the complete current test; its scene, frame and board hashes are verified. This is a review sheet, not artistic approval.
+Do not use the rejected prototype animation as a preview of this reset. Web metadata is handoff material,
+not a newly deployed frontend. Inspect all camera transitions before publishing scroll playback.
+
+OTHER REMAINING LIMITATIONS
+- Victorian desk archive has 1K maps despite the creator advertising 4K; reserve it for medium framing.
+- The Gothic carved table has verified 4K maps. Material source and license details are retained.
+- The pale weathered stone source is marble rock, not verified Istrian limestone.
+- Painted Plaster Wall is a photographic Poly Haven source; Marble016 is authored procedural PBR. These sources are not interchangeable provenance claims.
+- Source scale corrections and camera clearances require visual review with the final authentic products.
+- No claim of reference-quality completion, authentic manufacturing location or final product dimensions is made.
+- Source scripts are editable; rebuilding may replace hand edits. Preserve a working copy before rebuilding.
+- The genuine-product GLB helper passed compilation and isolated data checks, but no missing authentic GLB was available for a native Blender import/contact test.
+- The archive retains new source geometry, maps, references, metadata and scripts; intermediate gates and old scenes are excluded.
