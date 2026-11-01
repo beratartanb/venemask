@@ -1,0 +1,611 @@
+PUBLICATION NOTE
+Artifact paths in this report are relative to the local product_pipeline_batch_01/ package. Referenced models, source images, rendered images and Blender files are not included in this report-only publication.
+
+Snapshot generated 2026-11-01T04:45:36+00:00. This is a local production review, not an ecommerce frontend or a claim of artistic approval.
+
+8 real products selected; 10 journaled generation attempts; 10 actual GLB outputs on disk; 7 unique products configured for limited staging across 7 selected reviewed models. Hero-grade models: 0.
+
+
+A. Selected products
+====================
+Category labels below are curatorial test groupings from product titles/tags, not verified Shopify collection membership. Intended use records selection intent, not a model-quality approval.
+
+
+VM01 — La Regina Nera – Black Feather Venetian Mask: Mardi Gras, Masquerade Ball Costume, eyes wide shut
+https://venemask.com/products/la-regina-nera-black-feather-venetian-62815
+- Category: Venetian / luxury / feathers; intended use: hero
+- Chosen because: Principal requested black-feather Hero; tests fine feather silhouette and ornate face fidelity.
+
+VM02 — Aurélie: Luxury Ivory Feather Venetian Mask, Champagne Masquerade Headdress, Baroque Carnival Costume, Mardi Gras
+https://venemask.com/products/aurelie-luxury-ivory-feather-venetian-35546
+- Category: Venetian / luxury / feathers; intended use: hero
+- Chosen because: Ivory-and-gold feathered alternative; tests bright fine detail and a broad asymmetrical headdress.
+
+VM03 — Baroque Gold Eyes Wide Shut Inspired Mask: Ornate, Volto Mask
+https://venemask.com/products/baroque-gold-eyes-wide-shut-inspired-72901
+- Category: Venetian / ornate luxury; intended use: hero_or_midground
+- Chosen because: Non-feather ornate Volto control with a simpler outer silhouette, useful if feather reconstruction fails.
+
+VM04 — Blood Crying Venetian; Bloddy Eye, Cracking Face Pattern White Mask
+https://venemask.com/products/blood-crying-venetian-mask-bloddy-eye-24089
+- Category: Venetian / dark theatrical; intended use: midground
+- Chosen because: Distinct white, cracked and red-tear identity; useful texture fidelity and eye-opening test.
+
+VM05 — Slipknot Joey Jordison Mask - White and Black Mask - Metal Music Band Mask
+https://venemask.com/products/slipknot-joey-jordison-mask-white-and-black-mask-metal-music-band-mask
+- Category: Bands / stage; intended use: midground
+- Chosen because: Recognizable high-contrast stage mask; tests graphic pattern preservation on facial geometry.
+
+VM06 — Jhin League of Legends; Cosplay Wearable Party, Masquerade mask
+https://venemask.com/products/jhin-league-of-legends-mask-cosplay-wearable-mask-party-masquerade
+- Category: Fandom / cosplay; intended use: midground
+- Chosen because: Distinct stylized facial structure and color grouping diversify the collection test.
+
+VM07 — Forest Guardian Antler, Woodland Fantasy Mask: Elven Deer, Nature Inspired Cosplay
+https://venemask.com/products/forest-guardian-antler-woodland-fantasy-19185
+- Category: Fantasy / nature; intended use: midground
+- Chosen because: Antlers and organic sculpting test thin projections, branch continuity and complex silhouette.
+
+VM08 — Pink Blossom Fantasy Forest Spirit Mask: Nature Goddess, Enchanted Tree Face
+https://venemask.com/products/pink-blossom-fantasy-forest-spirit-mask-83326
+- Category: Fantasy / nature; intended use: midground
+- Chosen because: Botanical floral detail and pink/wood palette test ornament retention and an intimate Discovery composition.
+
+B. Source image package
+=======================
+Untouched catalog originals are the identity and color authority. PNG format conversions and imagegen background extractions are separate source-preparation files, not 3D models. Edited extractions may brighten surfaces or simplify fine feathers and ornament; they are not pixel-identical photographic cutouts.
+
+3 initial Jhin background-extraction images were rejected during preprocessing because they removed/changed real eye content. These are failed input edits, not Meshy model attempts. The corrected front input and any later Meshy result must still be judged against original photographs.
+
+  Detailed image-edit provenance and rejected-input record: catalog/cutout_preparation.json
+  Product-size evidence; overall display sizes remain estimated: catalog/product_dimensions_evidence.json
+
+VM01 — source images
+  Original catalog / front: sources/la-regina-nera-black-feather-venetian-62815/original_01.jpg
+  Original catalog / three-quarter facing image-right: sources/la-regina-nera-black-feather-venetian-62815/original_02.jpg
+  Original catalog / three-quarter facing image-left: sources/la-regina-nera-black-feather-venetian-62815/original_03.jpg
+  Original catalog / worn lifestyle / front-ish: sources/la-regina-nera-black-feather-venetian-62815/original_04.png
+Full black plume, speckled base, gold upper face, white crackle lower face and red lips retained in three original angles. Extraction appears brighter than source; fine edges may be simplified. Accept only as a reconstruction input experiment; final identity/color review must use original photos.
+
+  Extraction review and source mapping: catalog/VM01_extraction_review.json
+
+VM02 — source images
+  Original catalog / front on stand: sources/aurelie-luxury-ivory-feather-venetian-35546/original_01.jpg
+  Original catalog / three-quarter facing image-left on stand: sources/aurelie-luxury-ivory-feather-venetian-35546/original_02.jpg
+  Original catalog / three-quarter facing image-right on stand: sources/aurelie-luxury-ivory-feather-venetian-35546/original_03.jpg
+  Original catalog / worn lifestyle / three-quarter: sources/aurelie-luxury-ivory-feather-venetian-35546/original_04.jpg
+  Original catalog / worn lifestyle / side-ish: sources/aurelie-luxury-ivory-feather-venetian-35546/original_05.jpg
+Three actual source angles retained; ivory feather fan, half-mask and tassels recognizable, stand removed. Extraction is warmer/brighter and some fine tips meet frame edge. Experimental reconstruction input only; grade final output against unchanged original photos.
+
+  Extraction review and source mapping: catalog/VM02_extraction_review.json
+
+VM03 — source images
+  Original catalog / front: sources/baroque-gold-eyes-wide-shut-inspired-72901/original_01.jpg
+  Original catalog / three-quarter facing image-right: sources/baroque-gold-eyes-wide-shut-inspired-72901/original_02.jpg
+  Original catalog / three-quarter facing image-left: sources/baroque-gold-eyes-wide-shut-inspired-72901/original_03.jpg
+  Original catalog / worn lifestyle / front: sources/baroque-gold-eyes-wide-shut-inspired-72901/original_04.jpg
+Three original angles retain the two high gold upper points, gold scroll ornament, ivory lower face and red lips. Background and support removed. Tonal contrast differs and fine texture is not pixel-identical; final comparison must use original photographs.
+
+  Extraction review and source mapping: catalog/VM03_extraction_review.json
+
+VM04 — source images
+  Original catalog / front on neutral wall: sources/blood-crying-venetian-mask-bloddy-eye-24089/original_01.webp
+  Original catalog / three-quarter facing image-right on neutral wall: sources/blood-crying-venetian-mask-bloddy-eye-24089/original_02.webp
+  Original catalog / three-quarter facing image-left on neutral wall: sources/blood-crying-venetian-mask-bloddy-eye-24089/original_03.webp
+  Original catalog / worn lifestyle / three-quarter: sources/blood-crying-venetian-mask-bloddy-eye-24089/original_04.webp
+  Original catalog / worn lifestyle / near front: sources/blood-crying-venetian-mask-bloddy-eye-24089/original_05.webp
+  Original catalog / worn lifestyle / close three-quarter: sources/blood-crying-venetian-mask-bloddy-eye-24089/original_06.webp
+Lossless PNG format conversion only. No cropping, generated pixels, background removal, retouching or color changes.
+
+
+VM05 — source images
+  Original catalog / front on neutral wall: sources/slipknot-joey-jordison-mask-white-and-black-mask-metal-music-band-mask/original_01.webp
+  Original catalog / three-quarter facing image-right on neutral wall: sources/slipknot-joey-jordison-mask-white-and-black-mask-metal-music-band-mask/original_02.webp
+  Original catalog / three-quarter facing image-left on neutral wall: sources/slipknot-joey-jordison-mask-white-and-black-mask-metal-music-band-mask/original_03.webp
+  Original catalog / worn lifestyle / front-ish: sources/slipknot-joey-jordison-mask-white-and-black-mask-metal-music-band-mask/original_04.webp
+  Original catalog / worn lifestyle / three-quarter: sources/slipknot-joey-jordison-mask-white-and-black-mask-metal-music-band-mask/original_05.webp
+Lossless PNG format conversion only. No cropping, generated pixels, background removal, retouching or color changes.
+
+
+VM06 — source images
+  Original catalog / three-quarter facing image-left on stand: sources/jhin-league-of-legends-mask-cosplay-wearable-mask-party-masquerade/original_01.jpg
+  Original catalog / near front on stand: sources/jhin-league-of-legends-mask-cosplay-wearable-mask-party-masquerade/original_02.jpg
+  Original catalog / three-quarter facing image-right on stand: sources/jhin-league-of-legends-mask-cosplay-wearable-mask-party-masquerade/original_03.jpg
+  Original catalog / worn lifestyle / three-quarter: sources/jhin-league-of-legends-mask-cosplay-wearable-mask-party-masquerade/original_04.png
+Single actual front view. Corrected extraction retains asymmetric linework plus original dark left eye and blue-amber right eye content; earlier cutouts that removed eye content were rejected. Base removed; exposure/fine detail may differ. Actual eye construction and backside remain unverified.
+
+  Extraction review and source mapping: catalog/VM06_extraction_review.json
+
+VM07 — source images
+  Original catalog / front: sources/forest-guardian-antler-woodland-fantasy-19185/original_01.jpg
+  Original catalog / three-quarter facing image-right: sources/forest-guardian-antler-woodland-fantasy-19185/original_02.jpg
+  Original catalog / three-quarter facing image-left: sources/forest-guardian-antler-woodland-fantasy-19185/original_03.jpg
+  Original catalog / worn lifestyle / front-ish: sources/forest-guardian-antler-woodland-fantasy-19185/original_04.jpg
+Three original angles retain paired silver antlers, dark filigree half-mask, long lower cheek points and open eye/filigree gaps. Rock and scenery removed. Highlights and small relief are not pixel-identical; final fidelity checked against originals.
+
+  Extraction review and source mapping: catalog/VM07_extraction_review.json
+
+VM08 — source images
+  Original catalog / front: sources/pink-blossom-fantasy-forest-spirit-mask-83326/original_01.jpg
+  Original catalog / three-quarter facing image-left: sources/pink-blossom-fantasy-forest-spirit-mask-83326/original_02.jpg
+  Original catalog / three-quarter facing image-right: sources/pink-blossom-fantasy-forest-spirit-mask-83326/original_03.jpg
+  Original catalog / worn lifestyle / front-ish: sources/pink-blossom-fantasy-forest-spirit-mask-83326/original_04.jpg
+Three original angles retain pale face, grey branching crown, pink blossoms and lips, and pink-green branching facial decoration. Rock/background removed. Pink saturation and overall brightness increased during extraction; this is an explicit preprocessing limitation and outputs must be checked against original colors.
+
+  Extraction review and source mapping: catalog/VM08_extraction_review.json
+
+C. Meshy attempts
+=================
+Recorded consumed credits: 305. Conservative committed/reserved credits: 305. Approved existing-credit ceiling: 360. Remaining under that ceiling: 55. Unknown consumed-credit entries: 0. No purchase is included. Reservations count failed/uncertain states until reconciled; they are not refunds or a live account balance.
+
+
+VM01 — 2 generation attempt(s)
+- VM01_attempt01; status=SUCCEEDED; task=01a1953c-e439-7365-b3c0-9113fbc43a8a; consumed credits=30
+- Settings: ai_model=meshy-7.1, geometry_resolution=standard, texture_resolution=4k, should_texture=True, enable_pbr=True, should_remesh=False, image_enhancement=False
+  Meshy input: sources/la-regina-nera-black-feather-venetian-62815/isolated_01.png
+  Meshy input: sources/la-regina-nera-black-feather-venetian-62815/isolated_02.png
+  Meshy input: sources/la-regina-nera-black-feather-venetian-62815/isolated_03.png
+  Attempt provenance (local paths, source hashes and task identifier): meshy/state/attempts/VM01_attempt01.json
+  model / meshy/outputs/VM01_attempt01/model.glb: meshy/outputs/VM01_attempt01/model.glb
+  texture / meshy/outputs/VM01_attempt01/textures/00_base_color.png: meshy/outputs/VM01_attempt01/textures/00_base_color.png
+  texture / meshy/outputs/VM01_attempt01/textures/00_metallic.png: meshy/outputs/VM01_attempt01/textures/00_metallic.png
+  texture / meshy/outputs/VM01_attempt01/textures/00_roughness.png: meshy/outputs/VM01_attempt01/textures/00_roughness.png
+  texture / meshy/outputs/VM01_attempt01/textures/00_normal.png: meshy/outputs/VM01_attempt01/textures/00_normal.png
+  preview / meshy/outputs/VM01_attempt01/previews/back.png: meshy/outputs/VM01_attempt01/previews/back.png
+  preview / meshy/outputs/VM01_attempt01/previews/front.png: meshy/outputs/VM01_attempt01/previews/front.png
+  preview / meshy/outputs/VM01_attempt01/previews/left.png: meshy/outputs/VM01_attempt01/previews/left.png
+  preview / meshy/outputs/VM01_attempt01/previews/right.png: meshy/outputs/VM01_attempt01/previews/right.png
+- VM01_attempt02; status=SUCCEEDED; task=01a19552-4517-703e-b46d-f8c92d2a56cf; consumed credits=35
+- Settings: ai_model=meshy-7.1, geometry_resolution=2k, texture_resolution=4k, should_texture=True, enable_pbr=True, should_remesh=False, image_enhancement=False
+  Meshy input: sources/la-regina-nera-black-feather-venetian-62815/meshy_input_01.png
+  Attempt provenance (local paths, source hashes and task identifier): meshy/state/attempts/VM01_attempt02.json
+  model / meshy/outputs/VM01_attempt02/model.glb: meshy/outputs/VM01_attempt02/model.glb
+  texture / meshy/outputs/VM01_attempt02/textures/00_base_color.png: meshy/outputs/VM01_attempt02/textures/00_base_color.png
+  texture / meshy/outputs/VM01_attempt02/textures/00_metallic.png: meshy/outputs/VM01_attempt02/textures/00_metallic.png
+  texture / meshy/outputs/VM01_attempt02/textures/00_roughness.png: meshy/outputs/VM01_attempt02/textures/00_roughness.png
+  texture / meshy/outputs/VM01_attempt02/textures/00_normal.png: meshy/outputs/VM01_attempt02/textures/00_normal.png
+  preview / meshy/outputs/VM01_attempt02/previews/back.png: meshy/outputs/VM01_attempt02/previews/back.png
+  preview / meshy/outputs/VM01_attempt02/previews/front.png: meshy/outputs/VM01_attempt02/previews/front.png
+  preview / meshy/outputs/VM01_attempt02/previews/left.png: meshy/outputs/VM01_attempt02/previews/left.png
+  preview / meshy/outputs/VM01_attempt02/previews/right.png: meshy/outputs/VM01_attempt02/previews/right.png
+
+VM02 — 1 generation attempt(s)
+- VM02_attempt01; status=SUCCEEDED; task=01a19540-3fed-7740-acbd-f687694aa878; consumed credits=30
+- Settings: ai_model=meshy-7.1, geometry_resolution=standard, texture_resolution=4k, should_texture=True, enable_pbr=True, should_remesh=False, image_enhancement=False
+  Meshy input: sources/aurelie-luxury-ivory-feather-venetian-35546/isolated_01.png
+  Meshy input: sources/aurelie-luxury-ivory-feather-venetian-35546/isolated_02.png
+  Meshy input: sources/aurelie-luxury-ivory-feather-venetian-35546/isolated_03.png
+  Attempt provenance (local paths, source hashes and task identifier): meshy/state/attempts/VM02_attempt01.json
+  model / meshy/outputs/VM02_attempt01/model.glb: meshy/outputs/VM02_attempt01/model.glb
+  texture / meshy/outputs/VM02_attempt01/textures/00_base_color.png: meshy/outputs/VM02_attempt01/textures/00_base_color.png
+  texture / meshy/outputs/VM02_attempt01/textures/00_metallic.png: meshy/outputs/VM02_attempt01/textures/00_metallic.png
+  texture / meshy/outputs/VM02_attempt01/textures/00_roughness.png: meshy/outputs/VM02_attempt01/textures/00_roughness.png
+  texture / meshy/outputs/VM02_attempt01/textures/00_normal.png: meshy/outputs/VM02_attempt01/textures/00_normal.png
+  preview / meshy/outputs/VM02_attempt01/previews/back.png: meshy/outputs/VM02_attempt01/previews/back.png
+  preview / meshy/outputs/VM02_attempt01/previews/front.png: meshy/outputs/VM02_attempt01/previews/front.png
+  preview / meshy/outputs/VM02_attempt01/previews/left.png: meshy/outputs/VM02_attempt01/previews/left.png
+  preview / meshy/outputs/VM02_attempt01/previews/right.png: meshy/outputs/VM02_attempt01/previews/right.png
+
+VM03 — 1 generation attempt(s)
+- VM03_attempt01; status=SUCCEEDED; task=01a19540-ef67-7134-bb7a-ea7092afd0f1; consumed credits=30
+- Settings: ai_model=meshy-7.1, geometry_resolution=standard, texture_resolution=4k, should_texture=True, enable_pbr=True, should_remesh=False, image_enhancement=False
+  Meshy input: sources/baroque-gold-eyes-wide-shut-inspired-72901/isolated_01.png
+  Meshy input: sources/baroque-gold-eyes-wide-shut-inspired-72901/isolated_02.png
+  Meshy input: sources/baroque-gold-eyes-wide-shut-inspired-72901/isolated_03.png
+  Attempt provenance (local paths, source hashes and task identifier): meshy/state/attempts/VM03_attempt01.json
+  model / meshy/outputs/VM03_attempt01/model.glb: meshy/outputs/VM03_attempt01/model.glb
+  texture / meshy/outputs/VM03_attempt01/textures/00_base_color.png: meshy/outputs/VM03_attempt01/textures/00_base_color.png
+  texture / meshy/outputs/VM03_attempt01/textures/00_metallic.png: meshy/outputs/VM03_attempt01/textures/00_metallic.png
+  texture / meshy/outputs/VM03_attempt01/textures/00_roughness.png: meshy/outputs/VM03_attempt01/textures/00_roughness.png
+  texture / meshy/outputs/VM03_attempt01/textures/00_normal.png: meshy/outputs/VM03_attempt01/textures/00_normal.png
+  preview / meshy/outputs/VM03_attempt01/previews/back.png: meshy/outputs/VM03_attempt01/previews/back.png
+  preview / meshy/outputs/VM03_attempt01/previews/front.png: meshy/outputs/VM03_attempt01/previews/front.png
+  preview / meshy/outputs/VM03_attempt01/previews/left.png: meshy/outputs/VM03_attempt01/previews/left.png
+  preview / meshy/outputs/VM03_attempt01/previews/right.png: meshy/outputs/VM03_attempt01/previews/right.png
+
+VM04 — 1 generation attempt(s)
+- VM04_attempt01; status=SUCCEEDED; task=01a19536-2749-7031-85a9-bebdd95fd0f5; consumed credits=30
+- Settings: ai_model=meshy-7.1, geometry_resolution=standard, texture_resolution=4k, should_texture=True, enable_pbr=True, should_remesh=False, image_enhancement=False
+  Meshy input: sources/blood-crying-venetian-mask-bloddy-eye-24089/meshy_input_01.png
+  Meshy input: sources/blood-crying-venetian-mask-bloddy-eye-24089/meshy_input_02.png
+  Meshy input: sources/blood-crying-venetian-mask-bloddy-eye-24089/meshy_input_03.png
+  Attempt provenance (local paths, source hashes and task identifier): meshy/state/attempts/VM04_attempt01.json
+  model / meshy/outputs/VM04_attempt01/model.glb: meshy/outputs/VM04_attempt01/model.glb
+  texture / meshy/outputs/VM04_attempt01/textures/00_base_color.png: meshy/outputs/VM04_attempt01/textures/00_base_color.png
+  texture / meshy/outputs/VM04_attempt01/textures/00_metallic.png: meshy/outputs/VM04_attempt01/textures/00_metallic.png
+  texture / meshy/outputs/VM04_attempt01/textures/00_roughness.png: meshy/outputs/VM04_attempt01/textures/00_roughness.png
+  texture / meshy/outputs/VM04_attempt01/textures/00_normal.png: meshy/outputs/VM04_attempt01/textures/00_normal.png
+  preview / meshy/outputs/VM04_attempt01/previews/back.png: meshy/outputs/VM04_attempt01/previews/back.png
+  preview / meshy/outputs/VM04_attempt01/previews/front.png: meshy/outputs/VM04_attempt01/previews/front.png
+  preview / meshy/outputs/VM04_attempt01/previews/left.png: meshy/outputs/VM04_attempt01/previews/left.png
+  preview / meshy/outputs/VM04_attempt01/previews/right.png: meshy/outputs/VM04_attempt01/previews/right.png
+
+VM05 — 2 generation attempt(s)
+- VM05_attempt01; status=SUCCEEDED; task=01a19536-3b87-7618-b8fd-3e1cd6160c05; consumed credits=30
+- Settings: ai_model=meshy-7.1, geometry_resolution=standard, texture_resolution=4k, should_texture=True, enable_pbr=True, should_remesh=False, image_enhancement=False
+  Meshy input: sources/slipknot-joey-jordison-mask-white-and-black-mask-metal-music-band-mask/meshy_input_01.png
+  Meshy input: sources/slipknot-joey-jordison-mask-white-and-black-mask-metal-music-band-mask/meshy_input_02.png
+  Meshy input: sources/slipknot-joey-jordison-mask-white-and-black-mask-metal-music-band-mask/meshy_input_03.png
+  Attempt provenance (local paths, source hashes and task identifier): meshy/state/attempts/VM05_attempt01.json
+  model / meshy/outputs/VM05_attempt01/model.glb: meshy/outputs/VM05_attempt01/model.glb
+  texture / meshy/outputs/VM05_attempt01/textures/00_base_color.png: meshy/outputs/VM05_attempt01/textures/00_base_color.png
+  texture / meshy/outputs/VM05_attempt01/textures/00_metallic.png: meshy/outputs/VM05_attempt01/textures/00_metallic.png
+  texture / meshy/outputs/VM05_attempt01/textures/00_roughness.png: meshy/outputs/VM05_attempt01/textures/00_roughness.png
+  texture / meshy/outputs/VM05_attempt01/textures/00_normal.png: meshy/outputs/VM05_attempt01/textures/00_normal.png
+  preview / meshy/outputs/VM05_attempt01/previews/back.png: meshy/outputs/VM05_attempt01/previews/back.png
+  preview / meshy/outputs/VM05_attempt01/previews/front.png: meshy/outputs/VM05_attempt01/previews/front.png
+  preview / meshy/outputs/VM05_attempt01/previews/left.png: meshy/outputs/VM05_attempt01/previews/left.png
+  preview / meshy/outputs/VM05_attempt01/previews/right.png: meshy/outputs/VM05_attempt01/previews/right.png
+- VM05_attempt02; status=SUCCEEDED; task=01a19552-53de-7526-b095-1aea0cc99ad6; consumed credits=30
+- Settings: ai_model=meshy-7.1, geometry_resolution=standard, texture_resolution=4k, should_texture=True, enable_pbr=True, should_remesh=False, image_enhancement=False
+  Meshy input: sources/slipknot-joey-jordison-mask-white-and-black-mask-metal-music-band-mask/meshy_input_01.png
+  Attempt provenance (local paths, source hashes and task identifier): meshy/state/attempts/VM05_attempt02.json
+  model / meshy/outputs/VM05_attempt02/model.glb: meshy/outputs/VM05_attempt02/model.glb
+  texture / meshy/outputs/VM05_attempt02/textures/00_base_color.png: meshy/outputs/VM05_attempt02/textures/00_base_color.png
+  texture / meshy/outputs/VM05_attempt02/textures/00_metallic.png: meshy/outputs/VM05_attempt02/textures/00_metallic.png
+  texture / meshy/outputs/VM05_attempt02/textures/00_roughness.png: meshy/outputs/VM05_attempt02/textures/00_roughness.png
+  texture / meshy/outputs/VM05_attempt02/textures/00_normal.png: meshy/outputs/VM05_attempt02/textures/00_normal.png
+  preview / meshy/outputs/VM05_attempt02/previews/back.png: meshy/outputs/VM05_attempt02/previews/back.png
+  preview / meshy/outputs/VM05_attempt02/previews/front.png: meshy/outputs/VM05_attempt02/previews/front.png
+  preview / meshy/outputs/VM05_attempt02/previews/left.png: meshy/outputs/VM05_attempt02/previews/left.png
+  preview / meshy/outputs/VM05_attempt02/previews/right.png: meshy/outputs/VM05_attempt02/previews/right.png
+
+VM06 — 1 generation attempt(s)
+- VM06_attempt01; status=SUCCEEDED; task=01a1954a-4cd5-7564-90f3-d695c1a96b48; consumed credits=30
+- Settings: ai_model=meshy-7.1, geometry_resolution=standard, texture_resolution=4k, should_texture=True, enable_pbr=True, should_remesh=False, image_enhancement=False
+  Meshy input: sources/jhin-league-of-legends-mask-cosplay-wearable-mask-party-masquerade/isolated_02_preserve_eyes.png
+  Attempt provenance (local paths, source hashes and task identifier): meshy/state/attempts/VM06_attempt01.json
+  model / meshy/outputs/VM06_attempt01/model.glb: meshy/outputs/VM06_attempt01/model.glb
+  texture / meshy/outputs/VM06_attempt01/textures/00_base_color.png: meshy/outputs/VM06_attempt01/textures/00_base_color.png
+  texture / meshy/outputs/VM06_attempt01/textures/00_metallic.png: meshy/outputs/VM06_attempt01/textures/00_metallic.png
+  texture / meshy/outputs/VM06_attempt01/textures/00_roughness.png: meshy/outputs/VM06_attempt01/textures/00_roughness.png
+  texture / meshy/outputs/VM06_attempt01/textures/00_normal.png: meshy/outputs/VM06_attempt01/textures/00_normal.png
+  preview / meshy/outputs/VM06_attempt01/previews/back.png: meshy/outputs/VM06_attempt01/previews/back.png
+  preview / meshy/outputs/VM06_attempt01/previews/front.png: meshy/outputs/VM06_attempt01/previews/front.png
+  preview / meshy/outputs/VM06_attempt01/previews/left.png: meshy/outputs/VM06_attempt01/previews/left.png
+  preview / meshy/outputs/VM06_attempt01/previews/right.png: meshy/outputs/VM06_attempt01/previews/right.png
+
+VM07 — 1 generation attempt(s)
+- VM07_attempt01; status=SUCCEEDED; task=01a1954a-5af8-73a7-8414-241f2c1ab9e4; consumed credits=30
+- Settings: ai_model=meshy-7.1, geometry_resolution=standard, texture_resolution=4k, should_texture=True, enable_pbr=True, should_remesh=False, image_enhancement=False
+  Meshy input: sources/forest-guardian-antler-woodland-fantasy-19185/isolated_01.png
+  Meshy input: sources/forest-guardian-antler-woodland-fantasy-19185/isolated_02.png
+  Meshy input: sources/forest-guardian-antler-woodland-fantasy-19185/isolated_03.png
+  Attempt provenance (local paths, source hashes and task identifier): meshy/state/attempts/VM07_attempt01.json
+  model / meshy/outputs/VM07_attempt01/model.glb: meshy/outputs/VM07_attempt01/model.glb
+  texture / meshy/outputs/VM07_attempt01/textures/00_base_color.png: meshy/outputs/VM07_attempt01/textures/00_base_color.png
+  texture / meshy/outputs/VM07_attempt01/textures/00_metallic.png: meshy/outputs/VM07_attempt01/textures/00_metallic.png
+  texture / meshy/outputs/VM07_attempt01/textures/00_roughness.png: meshy/outputs/VM07_attempt01/textures/00_roughness.png
+  texture / meshy/outputs/VM07_attempt01/textures/00_normal.png: meshy/outputs/VM07_attempt01/textures/00_normal.png
+  preview / meshy/outputs/VM07_attempt01/previews/back.png: meshy/outputs/VM07_attempt01/previews/back.png
+  preview / meshy/outputs/VM07_attempt01/previews/front.png: meshy/outputs/VM07_attempt01/previews/front.png
+  preview / meshy/outputs/VM07_attempt01/previews/left.png: meshy/outputs/VM07_attempt01/previews/left.png
+  preview / meshy/outputs/VM07_attempt01/previews/right.png: meshy/outputs/VM07_attempt01/previews/right.png
+
+VM08 — 1 generation attempt(s)
+- VM08_attempt01; status=SUCCEEDED; task=01a1954a-8240-7005-a607-166fac240ef9; consumed credits=30
+- Settings: ai_model=meshy-7.1, geometry_resolution=standard, texture_resolution=4k, should_texture=True, enable_pbr=True, should_remesh=False, image_enhancement=False
+  Meshy input: sources/pink-blossom-fantasy-forest-spirit-mask-83326/isolated_01.png
+  Meshy input: sources/pink-blossom-fantasy-forest-spirit-mask-83326/isolated_02.png
+  Meshy input: sources/pink-blossom-fantasy-forest-spirit-mask-83326/isolated_03.png
+  Attempt provenance (local paths, source hashes and task identifier): meshy/state/attempts/VM08_attempt01.json
+  model / meshy/outputs/VM08_attempt01/model.glb: meshy/outputs/VM08_attempt01/model.glb
+  texture / meshy/outputs/VM08_attempt01/textures/00_base_color.png: meshy/outputs/VM08_attempt01/textures/00_base_color.png
+  texture / meshy/outputs/VM08_attempt01/textures/00_metallic.png: meshy/outputs/VM08_attempt01/textures/00_metallic.png
+  texture / meshy/outputs/VM08_attempt01/textures/00_roughness.png: meshy/outputs/VM08_attempt01/textures/00_roughness.png
+  texture / meshy/outputs/VM08_attempt01/textures/00_normal.png: meshy/outputs/VM08_attempt01/textures/00_normal.png
+  preview / meshy/outputs/VM08_attempt01/previews/back.png: meshy/outputs/VM08_attempt01/previews/back.png
+  preview / meshy/outputs/VM08_attempt01/previews/front.png: meshy/outputs/VM08_attempt01/previews/front.png
+  preview / meshy/outputs/VM08_attempt01/previews/left.png: meshy/outputs/VM08_attempt01/previews/left.png
+  preview / meshy/outputs/VM08_attempt01/previews/right.png: meshy/outputs/VM08_attempt01/previews/right.png
+
+D. Quality review
+=================
+A = close-up Hero; B = midground; C = distant background; D = reject. Grades are manual, view-restricted judgments. Rendered diagnosis and existence of a GLB are not artistic approval. A source-preparation acceptance is never a 3D quality grade.
+
+
+VM01_attempt01 — La Regina Nera – Black Feather Venetian Mask: Mardi Gras, Masquerade Ball Costume, eyes wide shut
+Raw-output grade: D. Integration grade: D. Review status: VISUALLY_REVIEWED_RAW_AND_MATERIAL_DERIVATIVE.
+
+Recognizable black-fan/gold/white/red arrangement, but the original fine feather identity is lost in thick fused foil/plastic forms. A roughness-only correction reduces glare without restoring the authentic plume. Rejected for scene staging and Hero use.
+
+- Thick merged feather forms and loss of fine feather barbs/negative spaces.
+- Silver-gray/plastic response remains after roughness floor 0.5.
+- Almost continuous invented rear feather mass; no real back reference.
+- Face and speckled decoration are simplified; scale remains estimated.
+- EXCLUDE: all product scene staging and Hero; retain only as failed-generation evidence.
+Documented Blender derivative: roughness floor=0.5. Reviewed source-preserving material response calibration; no repair of geometry defects Raw GLB, geometry and source textures remain the raw evidence; a material adjustment does not repair geometry.
+
+  Original catalog vs prepared input vs raw Blender output / VM01_attempt01 (board labels reflect their creation snapshot): reviews/VM01_attempt01/source_vs_model.jpg
+  Blender raw output / front / 640 × 640: reviews/VM01_attempt01/front.png
+  Blender raw output / three_quarter / 640 × 640: reviews/VM01_attempt01/three_quarter.png
+  Blender raw output / side / 640 × 640: reviews/VM01_attempt01/side.png
+  Blender raw output / back / 640 × 640: reviews/VM01_attempt01/back.png
+Material-calibration diagnostic exists. Its render availability does not grant a revised grade; only the manual manifest decision above does.
+
+  Blender material derivative / front / 640 × 640: reviews/VM01_attempt01/front_material_calibrated.png
+  Blender material derivative / three_quarter / 640 × 640: reviews/VM01_attempt01/three_quarter_material_calibrated.png
+  Original vs raw material vs roughness-only derivative / VM01_attempt01: reviews/VM01_attempt01/material_comparison.jpg
+  Original Meshy GLB: meshy/outputs/VM01_attempt01/model.glb
+
+VM01_attempt02 — La Regina Nera – Black Feather Venetian Mask: Mardi Gras, Masquerade Ball Costume, eyes wide shut
+Raw-output grade: D. Integration grade: D. Review status: VISUALLY_REVIEWED_ORIGINAL_PHOTOS_AND_FOUR_NATIVE_VIEWS.
+
+The higher-geometry original-photo retry still replaces fine black feather barbs with glossy folded blades. It adds a bead-like ruff, washes out the gold facial ornament and invents the rear fan/paint. It is not a faithful hero or usable scene asset.
+
+- Fine feather identity remains lost in fused folded glossy blades despite increased geometry.
+- Bead-like forehead ruff and washed gold replace finer original ornament.
+- Native eye-aperture readability is unreliable; white areas appear behind the eye regions.
+- Invented continuous rear fan and copied front paint on the inside are unsupported by real back photographs.
+- EXCLUDE all website product staging and Hero use; preserve as failed retry evidence.
+- Estimated width 0.70 m is not merchant measured.
+- View restriction: Excluded from all website product staging
+  Original catalog vs prepared input vs raw Blender output / VM01_attempt02 (board labels reflect their creation snapshot): reviews/VM01_attempt02/source_vs_model.jpg
+  Blender raw output / front / 640 × 640: reviews/VM01_attempt02/front.png
+  Blender raw output / three_quarter / 640 × 640: reviews/VM01_attempt02/three_quarter.png
+  Blender raw output / side / 640 × 640: reviews/VM01_attempt02/side.png
+  Blender raw output / back / 640 × 640: reviews/VM01_attempt02/back.png
+  Original Meshy GLB: meshy/outputs/VM01_attempt02/model.glb
+
+VM02_attempt01 — Aurélie: Luxury Ivory Feather Venetian Mask, Champagne Masquerade Headdress, Baroque Carnival Costume, Mardi Gras
+Raw-output grade: C. Integration grade: C. Review status: VISUALLY_REVIEWED_ORIGINAL_PHOTOS_AND_FOUR_NATIVE_VIEWS.
+
+Ivory feather fan, lace half-mask and twin tassels retain recognizable identity, but feathers become curled ribbon clumps and open lace becomes embossed solid relief. Only a small front-facing background display is defensible.
+
+- Feather barbs and thin separated plume structure replaced by thick curled ribbons.
+- Lace is largely filled relief rather than the catalog's delicate open structure.
+- Shallow matted invented feather back; no catalog back reference.
+- Small front-facing background use only; no Hero, featured midground, side or back reveals.
+- Physical display size is estimated, not merchant measured.
+- View restriction: Small front-facing background use only; no Hero, featured midground, side or back reveals.
+  Original catalog vs prepared input vs raw Blender output / VM02_attempt01 (board labels reflect their creation snapshot): reviews/VM02_attempt01/source_vs_model.jpg
+  Blender raw output / front / 640 × 640: reviews/VM02_attempt01/front.png
+  Blender raw output / three_quarter / 640 × 640: reviews/VM02_attempt01/three_quarter.png
+  Blender raw output / side / 640 × 640: reviews/VM02_attempt01/side.png
+  Blender raw output / back / 640 × 640: reviews/VM02_attempt01/back.png
+  Original Meshy GLB: meshy/outputs/VM02_attempt01/model.glb
+
+VM03_attempt01 — Baroque Gold Eyes Wide Shut Inspired Mask: Ornate, Volto Mask
+Raw-output grade: B. Integration grade: B. Review status: VISUALLY_REVIEWED_RAW_AND_MATERIAL_DERIVATIVE.
+
+The raised crown silhouette, open eyes, gold scrolling ornament, pale lower face and red lips remain recognizable. Roughness floor 0.32 controls overly mirror-like generated gold. Soft facial detail, approximate ornament and unsupported interior prevent Hero-quality classification.
+
+- Raw gold and red lips are excessively glossy; integration requires reviewed roughness floor 0.32.
+- Soft nose/lips and approximate rather than exact ornamental relief.
+- Generated gold ornament continues inside without back-photo evidence.
+- Physical height 0.3 m is estimated, not measured.
+- VIEW RESTRICTION: front and modest three-quarter midground; best-available Hero test may demonstrate the limitation but is not A-grade.
+- EXCLUDE: backside showcase and claims of production Hero quality.
+Documented Blender derivative: roughness floor=0.32. Reviewed source-preserving material response calibration; no repair of geometry defects Raw GLB, geometry and source textures remain the raw evidence; a material adjustment does not repair geometry.
+
+  Original catalog vs prepared input vs raw Blender output / VM03_attempt01 (board labels reflect their creation snapshot): reviews/VM03_attempt01/source_vs_model.jpg
+  Blender raw output / front / 640 × 640: reviews/VM03_attempt01/front.png
+  Blender raw output / three_quarter / 640 × 640: reviews/VM03_attempt01/three_quarter.png
+  Blender raw output / side / 640 × 640: reviews/VM03_attempt01/side.png
+  Blender raw output / back / 640 × 640: reviews/VM03_attempt01/back.png
+Material-calibration diagnostic exists. Its render availability does not grant a revised grade; only the manual manifest decision above does.
+
+  Blender material derivative / front / 640 × 640: reviews/VM03_attempt01/front_material_calibrated.png
+  Blender material derivative / three_quarter / 640 × 640: reviews/VM03_attempt01/three_quarter_material_calibrated.png
+  Original vs raw material vs roughness-only derivative / VM03_attempt01: reviews/VM03_attempt01/material_comparison.jpg
+  Original Meshy GLB: meshy/outputs/VM03_attempt01/model.glb
+
+VM04_attempt01 — Blood Crying Venetian; Bloddy Eye, Cracking Face Pattern White Mask
+Raw-output grade: B. Integration grade: B. Review status: VISUALLY_REVIEWED_NATIVE_BLENDER.
+
+Exterior identity is recognizable: elongated white crackle face, correct image-right red tear, open eye holes and plausible concave face shell. Nose/lips are softened and eye rims are slightly uneven. The inside crackle is generated without back-photo support.
+
+- Softened nose and lip detail compared with original product photographs.
+- Uneven generated eye-rim geometry.
+- Crackle texture transferred across the full inside surface; authenticity of that interior is unverified.
+- Physical dimensions were not measured; neutral QA uses a 0.4 metre diagnostic height.
+- Approximately 552202 triangles; not yet optimized for direct real-time web use.
+- VIEW RESTRICTION: Front and modest three-quarter midground staging
+- EXCLUDE: Close-up Hero
+- EXCLUDE: Inside/back showcase
+- EXCLUDE: Claims of accurate measured dimensions
+  Original catalog vs prepared input vs raw Blender output / VM04_attempt01 (board labels reflect their creation snapshot): reviews/VM04_attempt01/source_vs_model.jpg
+  Blender raw output / front / 640 × 640: reviews/VM04_attempt01/front.png
+  Blender raw output / three_quarter / 640 × 640: reviews/VM04_attempt01/three_quarter.png
+  Blender raw output / side / 640 × 640: reviews/VM04_attempt01/side.png
+  Blender raw output / back / 640 × 640: reviews/VM04_attempt01/back.png
+  Original Meshy GLB: meshy/outputs/VM04_attempt01/model.glb
+
+VM05_attempt01 — Slipknot Joey Jordison Mask - White and Black Mask - Metal Music Band Mask
+Raw-output grade: C. Integration grade: C. Review status: VISUALLY_REVIEWED_NATIVE_BLENDER.
+
+Oval face and major black/white markings remain recognizable, but eye surrounds, lip edges and forehead marks are inflated and excessively glossy with ragged geometry and small white gaps. Source photographs do not support the generated black markings on the inside shell.
+
+- Raised, ragged eye-rim and painted-mark geometry.
+- Small white gaps and broken-looking areas around black eye and lip markings.
+- Overly strong glossy response emphasizes generated surface irregularities.
+- Inside eye/lip markings are generated without back-photo evidence.
+- Physical dimensions were not measured; neutral QA uses a 0.4 metre diagnostic height.
+- Approximately 872856 triangles; not yet optimized for direct real-time web use.
+- VIEW RESTRICTION: Distant front-facing secondary/background staging
+- EXCLUDE: Hero
+- EXCLUDE: Prominent close-up or feature display
+- EXCLUDE: Inside/back showcase
+  Original catalog vs prepared input vs raw Blender output / VM05_attempt01 (board labels reflect their creation snapshot): reviews/VM05_attempt01/source_vs_model.jpg
+  Blender raw output / front / 640 × 640: reviews/VM05_attempt01/front.png
+  Blender raw output / three_quarter / 640 × 640: reviews/VM05_attempt01/three_quarter.png
+  Blender raw output / side / 640 × 640: reviews/VM05_attempt01/side.png
+  Blender raw output / back / 640 × 640: reviews/VM05_attempt01/back.png
+  Original Meshy GLB: meshy/outputs/VM05_attempt01/model.glb
+
+VM05_attempt02 — Slipknot Joey Jordison Mask - White and Black Mask - Metal Music Band Mask
+Raw-output grade: C. Integration grade: C. Review status: VISUALLY_REVIEWED_ORIGINAL_AND_FOUR_NATIVE_VIEWS.
+
+The real Joey white oval and black markings remain recognizable at small scale, but the retry loses the filled black lip and tear patches and thickens reflective eye rings. It does not improve the first attempt. Grade C at best; retain attempt01 for actual background staging.
+
+- Black lip fill becomes a pale outlined mouth and portions of black tear fill are lost.
+- Raised tubular glossy eye rings and distorted reflective black markings persist.
+- Almost the entire front paint is copied to the generated inside without back evidence.
+- Only small frontal background use could be defensible; no Hero, midground feature, side or rear reveal.
+- Not selected for staging because attempt01 retains product pattern better.
+- Estimated physical height 0.24 m is not merchant measured.
+- View restriction: Small frontal background only; prefer attempt01
+  Original catalog vs prepared input vs raw Blender output / VM05_attempt02 (board labels reflect their creation snapshot): reviews/VM05_attempt02/source_vs_model.jpg
+  Blender raw output / front / 640 × 640: reviews/VM05_attempt02/front.png
+  Blender raw output / three_quarter / 640 × 640: reviews/VM05_attempt02/three_quarter.png
+  Blender raw output / side / 640 × 640: reviews/VM05_attempt02/side.png
+  Blender raw output / back / 640 × 640: reviews/VM05_attempt02/back.png
+  Original Meshy GLB: meshy/outputs/VM05_attempt02/model.glb
+
+VM06_attempt01 — Jhin League of Legends; Cosplay Wearable Party, Masquerade mask
+Raw-output grade: B. Integration grade: B. Review status: VISUALLY_REVIEWED_ORIGINAL_PHOTOS_AND_FOUR_NATIVE_VIEWS.
+
+The ivory angular facial silhouette, split crown/chin and asymmetrical engraved linework retain the real Jhin product identity. Softened facial planes, simplified linework and unresolved eye-interior appearance prevent Hero classification.
+
+- Sculptural planes and engraved lines are softer/simpler than catalog photos.
+- Catalog blue/amber eye-interior appearance is not reproduced; whether it represents structure or reflected/background light is unresolved.
+- Shallow generated back is unverified by catalog photographs.
+- Controlled front and modest three-quarter midground only; no Hero closeup or rear reveal.
+- Physical display size is estimated, not merchant measured.
+- View restriction: Controlled front and modest three-quarter midground only; no Hero closeup or rear reveal.
+  Original catalog vs prepared input vs raw Blender output / VM06_attempt01 (board labels reflect their creation snapshot): reviews/VM06_attempt01/source_vs_model.jpg
+  Blender raw output / front / 640 × 640: reviews/VM06_attempt01/front.png
+  Blender raw output / three_quarter / 640 × 640: reviews/VM06_attempt01/three_quarter.png
+  Blender raw output / side / 640 × 640: reviews/VM06_attempt01/side.png
+  Blender raw output / back / 640 × 640: reviews/VM06_attempt01/back.png
+  Original Meshy GLB: meshy/outputs/VM06_attempt01/model.glb
+
+VM07_attempt01 — Forest Guardian Antler, Woodland Fantasy Mask: Elven Deer, Nature Inspired Cosplay
+Raw-output grade: B. Integration grade: B. Review status: VISUALLY_REVIEWED_ORIGINAL_PHOTOS_AND_FOUR_NATIVE_VIEWS.
+
+Branching antlers, large negative spaces, eye openings and long ornamental cheeks keep Forest Guardian recognizable. Fine relief softens and the generated bright silver response differs from the darker antique source finish.
+
+- Bright silver material response differs from dark antique metal in original photographs.
+- Fine ornamental relief and antler grooves are softened/approximated.
+- Rear ornamental treatment is generated without a real back reference.
+- Controlled front and modest three-quarter midground only; no Hero closeup or rear reveal.
+- Physical display size is estimated, not merchant measured.
+- View restriction: Controlled front and modest three-quarter midground only; no Hero closeup or rear reveal.
+  Original catalog vs prepared input vs raw Blender output / VM07_attempt01 (board labels reflect their creation snapshot): reviews/VM07_attempt01/source_vs_model.jpg
+  Blender raw output / front / 640 × 640: reviews/VM07_attempt01/front.png
+  Blender raw output / three_quarter / 640 × 640: reviews/VM07_attempt01/three_quarter.png
+  Blender raw output / side / 640 × 640: reviews/VM07_attempt01/side.png
+  Blender raw output / back / 640 × 640: reviews/VM07_attempt01/back.png
+  Original Meshy GLB: meshy/outputs/VM07_attempt01/model.glb
+
+VM08_attempt01 — Pink Blossom Fantasy Forest Spirit Mask: Nature Goddess, Enchanted Tree Face
+Raw-output grade: B. Integration grade: B. Review status: VISUALLY_REVIEWED_ORIGINAL_PHOTOS_AND_FOUR_NATIVE_VIEWS.
+
+Branch crown, pink buds/lips and turquoise cheek details preserve Pink Blossom's recognizable identity. Pale washed material response, softened veins/buds and an unsupported decorated back prevent Hero quality.
+
+- Pale/washed materials do not retain the full catalog gray/pink contrast.
+- Branch veins and bud forms are simplified; some crown details merge.
+- Generated painted/ornamented back has no catalog reference.
+- Controlled front and modest three-quarter midground only; no Hero closeup or rear reveal.
+- Physical display size is estimated, not merchant measured.
+- View restriction: Controlled front and modest three-quarter midground only; no Hero closeup or rear reveal.
+  Original catalog vs prepared input vs raw Blender output / VM08_attempt01 (board labels reflect their creation snapshot): reviews/VM08_attempt01/source_vs_model.jpg
+  Blender raw output / front / 640 × 640: reviews/VM08_attempt01/front.png
+  Blender raw output / three_quarter / 640 × 640: reviews/VM08_attempt01/three_quarter.png
+  Blender raw output / side / 640 × 640: reviews/VM08_attempt01/side.png
+  Blender raw output / back / 640 × 640: reviews/VM08_attempt01/back.png
+  Original Meshy GLB: meshy/outputs/VM08_attempt01/model.glb
+
+E. Blender integration
+======================
+Native QA imports are distinct from reviewed scene staging. The raw QA scenes use a diagnostic normalization; site-test target dimensions are explicit estimates unless supported by measurements. No overall dimensions were supplied by the selected catalog descriptions; listed shell thickness is not overall mask depth.
+
+- VM01_attempt01: native QA import=recorded; triangles=4931060; staging grade=D; rotation degrees=[0, 0, 0]; target=0.7 m on X (estimated); physical size verified=False
+  Editable raw native QA scene: reviews/VM01_attempt01/product_review.blend
+  Editable material derivative QA scene: reviews/VM01_attempt01/product_material_calibrated.blend
+- VM01_attempt02: native QA import=recorded; triangles=7656910; staging grade=D; rotation degrees=[0, 0, 0]; target=0.7 m on X (estimated); physical size verified=False
+  Editable raw native QA scene: reviews/VM01_attempt02/product_review.blend
+- VM02_attempt01: native QA import=recorded; triangles=7835818; staging grade=C; rotation degrees=[0, 0, 0]; target=0.7 m on X (estimated); physical size verified=False
+  Editable raw native QA scene: reviews/VM02_attempt01/product_review.blend
+- VM03_attempt01: native QA import=recorded; triangles=950774; staging grade=B; rotation degrees=[0, 0, 0]; target=0.3 m on Z (estimated); physical size verified=False
+  Editable raw native QA scene: reviews/VM03_attempt01/product_review.blend
+  Editable material derivative QA scene: reviews/VM03_attempt01/product_material_calibrated.blend
+- VM04_attempt01: native QA import=recorded; triangles=552202; staging grade=B; rotation degrees=[0, 0, 0]; target=0.24 m on Z (estimated); physical size verified=False
+  Editable raw native QA scene: reviews/VM04_attempt01/product_review.blend
+- VM05_attempt01: native QA import=recorded; triangles=872856; staging grade=C; rotation degrees=[0, 0, 0]; target=0.24 m on Z (estimated); physical size verified=False
+  Editable raw native QA scene: reviews/VM05_attempt01/product_review.blend
+- VM05_attempt02: native QA import=recorded; triangles=1014352; staging grade=C; rotation degrees=[0, 0, 0]; target=0.24 m on Z (estimated); physical size verified=False
+  Editable raw native QA scene: reviews/VM05_attempt02/product_review.blend
+- VM06_attempt01: native QA import=recorded; triangles=506742; staging grade=B; rotation degrees=[0, 0, 0]; target=0.3 m on Z (estimated); physical size verified=False
+  Editable raw native QA scene: reviews/VM06_attempt01/product_review.blend
+- VM07_attempt01: native QA import=recorded; triangles=832144; staging grade=B; rotation degrees=[0, 0, 0]; target=0.6 m on Z (estimated); physical size verified=False
+  Editable raw native QA scene: reviews/VM07_attempt01/product_review.blend
+- VM08_attempt01: native QA import=recorded; triangles=1745026; staging grade=B; rotation degrees=[0, 0, 0]; target=0.5 m on Z (estimated); physical size verified=False
+  Editable raw native QA scene: reviews/VM08_attempt01/product_review.blend
+Raw, unremeshed GLBs and 4K textures are large and are not browser-ready real-time assets. This package tests prerendered Blender scenes. Real-time deployment would require a separately reviewed optimization/LOD and texture-delivery pass.
+
+  Bundled Pillow image-comparison utility license: scripts/vendor/pillow-13.0.0.dist-info/licenses/LICENSE
+
+F. Scene test output
+====================
+Four requested static production tests: Hero, Collections, Best Sellers display study and New Arrivals/Discovery. These names do not assert actual sales ranking, new-product status or finished storefront quality. An available render is still unapproved unless its visual review says otherwise.
+
+
+Hero
+  Actual Blender scene test / Hero: scene_tests/hero.png
+1280 × 720; 40 samples; device=CPU; distinct products=1; requested product count met=True; visual approval=False.
+
+- Products: VM03_attempt01 [B]
+Visually checked in actual native evaluation PNG; no obvious floating/intersection at this resolution, exact physical seating remains a production refinement
+
+Hero framing experiment only: the featured product is not A-grade. This does not complete or approve the required Hero.
+
+  Editable scene test: scene_tests/hero.blend
+
+Collections world
+  Actual Blender scene test / Collections world: scene_tests/collections.png
+1280 × 720; 40 samples; device=CPU; distinct products=7; requested product count met=True; visual approval=False.
+
+- Products: VM03_attempt01 [B], VM04_attempt01 [B], VM06_attempt01 [B], VM07_attempt01 [B], VM08_attempt01 [B], VM02_attempt01 [C], VM05_attempt01 [C]
+Visually checked in actual native evaluation PNG; no obvious floating/intersection at this resolution, exact physical seating remains a production refinement
+
+  Editable scene test: scene_tests/collections.blend
+
+Best Sellers display study
+  Actual Blender scene test / Best Sellers display study: scene_tests/best_sellers.png
+1280 × 720; 40 samples; device=CPU; distinct products=4; requested product count met=True; visual approval=False.
+
+- Products: VM03_attempt01 [B], VM04_attempt01 [B], VM06_attempt01 [B], VM07_attempt01 [B]
+Visually checked in actual native evaluation PNG; no obvious floating/intersection at this resolution, exact physical seating remains a production refinement
+
+  Editable scene test: scene_tests/best_sellers.blend
+
+New Arrivals / Discovery
+  Actual Blender scene test / New Arrivals / Discovery: scene_tests/discovery.png
+1280 × 720; 40 samples; device=CPU; distinct products=3; requested product count met=True; visual approval=False.
+
+- Products: VM07_attempt01 [B], VM08_attempt01 [B], VM03_attempt01 [B]
+Visually checked in actual native evaluation PNG; no obvious floating/intersection at this resolution, exact physical seating remains a production refinement
+
+  Editable scene test: scene_tests/discovery.blend
+  Scene camera, projection, product positions and render metadata: scene_tests/scene_tests.json
+  Final native-image visual inspection and remaining artistic limitations: scene_tests/scene_visual_review.json
+  Native Blender reopen audit: packed assets and scene validation: scene_tests/scene_file_validation.json
+Final scene inspection is separate from production art-direction approval. Recorded production approval: False.
+
+- No A-grade model exists in this batch. Both La Regina attempts are rejected and excluded.
+- All physical dimensions remain clearly labeled display estimates.
+- The four compact sets are integration tests, not a finished connected cinematic world or frontend.
+- Rear surfaces and exact manufacturing geometry remain unverified; reviewed front/modest-three-quarter restrictions apply.
+  Environment asset sources and licenses: scene_tests/environment_assets.json
+  Environment credits: scene_tests/ATTRIBUTION.txt
+  Four actual Blender scene tests / comparison contact sheet: scene_tests/scene_test_contact_sheet.jpg
+  Original catalog photographs vs first and retry Blender outputs / failed results retained: reviews/retry_comparison.jpg
+  Independent source-versus-native-render quality review: catalog/independent_review.json
+  Prerendered static-test handoff: images, cameras and product metadata: web_handoff/scene_test_handoff.json
+  Web handoff scope and limitations: web_handoff/README.txt
+  Self-contained scene rebuild dependencies: environment_sources/README.txt
+  Packaged environment source licenses and attribution: environment_sources/ATTRIBUTION.txt
+  Environment dependency file hashes: environment_sources/metadata/file_hashes.json
+  Meshy commercial-use documentation and unverified account-plan distinction: meshy/license_notes.txt
+
+G. Honest verdict
+=================
+Current manual integration grades: B=5, C=3, D=2. Verified native diagnostic images: 44. Verified completed scene-test PNGs: 4/4.
+
+Manually authored verdict supplied from catalog/final_product_verdict.json:
+
+- Pipeline: The real-product image-to-Meshy-to-Blender workflow produced ten actual GLBs from eight current Venemask products. Source photographs, preparation edits, generation attempts and native Blender reviews are retained. It supports a restricted secondary-staging test; it does not yet establish faithful close-up product reconstruction or a finished cinematic storefront.
+- Hero: No A-grade model passed. Both La Regina Nera attempts are D and excluded from scene staging. The Hero composition uses B-grade Baroque Gold as a deliberately provisional close-up stress test. A flattering render cannot restore missing product detail or establish Hero readiness.
+- Secondary: Seven unique products are conditionally usable: five B-grade models for controlled front/modest three-quarter midground views and two C-grade models for small front-facing background views. Joey attempt01 is preferred over its C-grade retry. Rear construction is unverified, physical dimensions are estimates, and several materials/ornaments differ from the originals. Raw high-density GLBs are not optimized browser assets.
+- Next_steps: Capture neutral-background, color-controlled front, three-quarter, side and rear photographs of the physical masks, plus measured dimensions; preserve source pixels during isolation.; For the feathered Hero, test product-specific manual reconstruction or a suitable physical capture workflow with separately authored feather structure, validated against the actual product. These two Meshy attempts do not justify another blind upscale or an automatic Hero promotion.; Correct material separation and soften only documented PBR errors; validate color, cutouts, ornament and silhouette again under both neutral and cinematic lighting.; Create and review reduced geometry and baked textures before real-time web use. The current handoff contains pre-rendered static tests and camera/product metadata, not a deployed site or scroll sequence.
